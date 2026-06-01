@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Salon Vebira — kozmetičko-frizerski salon u Beogradu. Depilacija hladnim voskom, medicinski pedikir, tretmani lica. Ratka Mitrovića 162/20.">
+  <title>Salon Vebira | Kozmetičko-frizerski salon Beograd</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:  '#FAF7F2',
+            blush:  '#E8D6CC',
+            rose:   '#C24371',
+            'rose-deep': '#A0355A',
+            bark:   '#7A6253',
+            espresso: '#3D2E28',
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body:    ['Montserrat', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #FAF7F2;
+      color: #3D2E28;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #FAF7F2; }
+    ::-webkit-scrollbar-thumb { background: #E8D6CC; border-radius: 99px; }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s cubic-bezier(.22,.68,0,1.2), transform 0.75s cubic-bezier(.22,.68,0,1.2);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ── Nav ── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 24px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    #nav.scrolled {
+      padding: 14px 48px;
+      background: rgba(250,247,242,0.94);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(122,98,83,0.12);
+    }
+    .nav-link {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #7A6253; text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: #C24371;
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover { color: #C24371; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:active { transform: scale(0.97) !important; }
+
+    .btn-solid {
+      background: linear-gradient(135deg, #C24371 0%, #A0355A 100%);
+      color: #fff;
+      padding: 15px 36px; border-radius: 50px;
+      box-shadow: 0 4px 24px rgba(194,67,113,0.32);
+    }
+    .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(194,67,113,0.42); }
+
+    .btn-ghost {
+      border: 1.5px solid #C24371; color: #C24371;
+      padding: 14px 36px; border-radius: 50px; background: transparent;
+    }
+    .btn-ghost:hover { transform: translateY(-2px); background: rgba(194,67,113,0.06); }
+
+    /* ── Section label ── */
+    .label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: #C24371;
+    }
+
+    /* ── Divider ── */
+    .rule {
+      display: block; width: 40px; height: 1.5px;
+      background: linear-gradient(90deg, #C24371, #E8D6CC);
+      margin: 18px 0 28px;
+    }
+    .rule.centered { margin: 18px auto 28px; }
+
+    /* ── Service card ── */
+    .svc-card {
+      background: #fff; border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 2px 0 #E8D6CC, 0 8px 32px rgba(122,98,83,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .svc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 2px 0 #C24371, 0 16px 48px rgba(194,67,113,0.12);
+    }
+    .svc-card.featured {
+      background: linear-gradient(140deg, #C24371 0%, #8B2A47 100%);
+      box-shadow: 0 2px 0 #8B2A47, 0 8px 32px rgba(194,67,113,0.3);
+      color: #fff;
+    }
+    .svc-card.featured:hover {
+      box-shadow: 0 2px 0 #8B2A47, 0 16px 48px rgba(194,67,113,0.4);
+    }
+
+    .price-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(122,98,83,0.15);
+      font-size: 13px;
+    }
+    .price-row:last-child { border-bottom: none; }
+    .price-row .price { color: #C24371; font-weight: 600; white-space: nowrap; margin-left: 12px; }
+    .svc-card.featured .price-row { border-bottom-color: rgba(255,255,255,0.15); }
+    .svc-card.featured .price-row .price { color: rgba(255,255,255,0.85); }
+
+    /* ── Icon box ── */
+    .icon-box {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, rgba(194,67,113,0.1), rgba(232,214,204,0.35));
+    }
+    .featured .icon-box { background: rgba(255,255,255,0.18); }
+
+    /* ── BA card ── */
+    .ba-card { border-radius: 20px; overflow: hidden; position: relative; }
+    .ba-label {
+      position: absolute; bottom: 12px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #fff; padding: 4px 10px; border-radius: 50px; backdrop-filter: blur(6px);
+    }
+    .ba-label.pre  { left: 12px;  background: rgba(61,46,40,0.55); }
+    .ba-label.post { right: 12px; background: rgba(194,67,113,0.6); }
+
+    /* ── Testimonial ── */
+    .t-card {
+      background: #fff; border-radius: 24px; padding: 32px;
+      box-shadow: 0 2px 0 #E8D6CC, 0 8px 32px rgba(122,98,83,0.07);
+      position: relative; overflow: hidden;
+    }
+    .t-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px; line-height: 1; font-weight: 300;
+      color: #F0E8E2;
+      position: absolute; top: -8px; left: 20px;
+      pointer-events: none; user-select: none;
+    }
+    .stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .star-svg { fill: #C24371; }
+
+    /* ── Form ── */
+    .field-label {
+      display: block; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #7A6253; margin-bottom: 8px;
+    }
+    .field-input {
+      width: 100%; padding: 14px 18px;
+      border: 1.5px solid #E8D6CC; border-radius: 12px;
+      background: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 14px; color: #3D2E28;
+      outline: none;
+      transition: border-color 0.2s ease;
+      appearance: none;
+    }
+    .field-input::placeholder { color: #C4B0A6; }
+    .field-input:focus { border-color: #C24371; }
+
+    /* ── Differentiator ── */
+    .diff-item {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 24px; border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 2px 0 #E8D6CC, 0 4px 20px rgba(122,98,83,0.07);
+      transition: transform 0.2s ease;
+    }
+    .diff-item:hover { transform: translateX(6px); }
+
+    /* ── Mobile menu ── */
+    #mob-menu {
+      position: fixed; inset: 0; z-index: 99;
+      background: rgba(250,247,242,0.98); backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 32px;
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(.22,.68,0,1.1);
+    }
+    #mob-menu.open { transform: translateY(0); }
+    #mob-menu .nav-link { font-size: 14px; }
+
+    /* ── Hamburger ── */
+    .ham span {
+      display: block; width: 24px; height: 1.5px;
+      background: #3D2E28; border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+    .ham span:nth-child(2) { width: 16px; }
+    .ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+
+    /* ── Hero shapes ── */
+    .blob1 {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(194,67,113,0.1) 0%, transparent 70%);
+      animation: float1 8s ease-in-out infinite;
+    }
+    .blob2 {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,214,204,0.6) 0%, transparent 70%);
+      animation: float2 10s ease-in-out infinite;
+    }
+    @keyframes float1 {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50%       { transform: translate(-30px, 20px) scale(1.08); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50%       { transform: translate(20px, -30px) scale(1.06); }
+    }
+
+    /* ── Scroll indicator ── */
+    .scroll-line {
+      width: 1px; height: 48px; overflow: hidden; margin: 0 auto;
+    }
+    .scroll-line::after {
+      content: ''; display: block;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, #7A6253, transparent);
+      animation: scrollDrop 2s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0%   { transform: translateY(-100%); opacity: 1; }
+      100% { transform: translateY(100%);  opacity: 0; }
+    }
+
+    /* ── Stat pill ── */
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300; line-height: 1;
+      color: #C24371;
+    }
+    .stat-lbl {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7A6253; margin-top: 6px;
+    }
+
+    /* ── Map ── */
+    .map-wrap {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 2px 0 #E8D6CC, 0 8px 32px rgba(122,98,83,0.1);
+    }
+
+    /* ── Info card ── */
+    .info-card {
+      display: flex; align-items: center; gap: 16px;
+      background: #fff; border-radius: 16px; padding: 18px 20px;
+      box-shadow: 0 2px 0 #E8D6CC, 0 4px 16px rgba(122,98,83,0.07);
+      text-decoration: none; color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 2px 0 #C24371, 0 10px 32px rgba(194,67,113,0.12);
+    }
+    .info-icon {
+      width: 44px; height: 44px; min-width: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Hours card ── */
+    .hours-card {
+      background: linear-gradient(135deg, #FAF7F2, #F3EAE3);
+      border: 1px solid #E8D6CC; border-radius: 18px; padding: 24px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #2E2118; color: rgba(255,255,255,0.65);
+      padding: 56px 0 32px;
+    }
+
+    /* ── Responsive helpers ── */
+    @media (max-width: 767px) {
+      #nav { padding: 18px 20px; }
+      #nav.scrolled { padding: 12px 20px; }
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .hero-img-wrap { display: none !important; }
+      .svc-grid { grid-template-columns: 1fr !important; }
+      .ba-grid  { grid-template-columns: 1fr 1fr !important; }
+      .t-grid   { grid-template-columns: 1fr !important; }
+      .contact-grid { grid-template-columns: 1fr !important; }
+      .footer-grid  { grid-template-columns: 1fr !important; }
+      .stats-row    { gap: 24px !important; }
+      h1.display { font-size: 54px !important; }
+      .section-h2 { font-size: 42px !important; }
+    }
+    @media (max-width: 480px) {
+      h1.display { font-size: 44px !important; }
+      .ba-grid  { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#hero" aria-label="Salon Vebira početna">
+    <img src="brand-assets/Logo/full-logo-transparent.png" alt="Salon Vebira" style="height:44px;width:auto;">
+  </a>
+
+  <!-- Desktop links -->
+  <div style="display:flex;align-items:center;gap:36px;" class="hidden-mob">
+    <a href="#usluge"      class="nav-link">Usluge</a>
+    <a href="#o-nama"      class="nav-link">O nama</a>
+    <a href="#pre-posle"   class="nav-link">Pre i posle</a>
+    <a href="#utisci"      class="nav-link">Utisci</a>
+    <a href="#kontakt"     class="btn btn-solid" style="font-size:10px;padding:12px 28px;">Zakažite termin</a>
+  </div>
+
+  <!-- Hamburger -->
+  <button id="ham-btn" class="ham" aria-label="Otvori meni" style="display:none;flex-direction:column;gap:5.5px;background:none;border:none;cursor:pointer;padding:4px;">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div id="mob-menu">
+  <a href="#usluge"    class="nav-link" onclick="closeMenu()">Usluge</a>
+  <a href="#o-nama"    class="nav-link" onclick="closeMenu()">O nama</a>
+  <a href="#pre-posle" class="nav-link" onclick="closeMenu()">Pre i posle</a>
+  <a href="#utisci"    class="nav-link" onclick="closeMenu()">Utisci</a>
+  <a href="#kontakt"   class="btn btn-solid" onclick="closeMenu()">Zakažite termin</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero" style="position:relative;min-height:100dvh;display:flex;align-items:center;overflow:hidden;padding-top:80px;">
+
+  <!-- Ambient blobs -->
+  <div class="blob1" style="top:-10%;right:-5%;width:55vw;height:55vw;max-width:700px;max-height:700px;"></div>
+  <div class="blob2" style="bottom:-5%;left:-8%;width:40vw;height:40vw;max-width:500px;max-height:500px;"></div>
+
+  <!-- Botanical SVG decoration -->
+  <svg style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);height:90vh;width:auto;opacity:0.06;pointer-events:none;" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#7A6253" stroke-width="1" fill="none" stroke-linecap="round">
+      <circle cx="280" cy="360" r="90"/><circle cx="280" cy="360" r="55"/><circle cx="280" cy="360" r="22"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(0 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(45 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(90 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(135 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(180 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(225 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(270 280 360)"/>
+      <ellipse cx="280" cy="255" rx="24" ry="50" transform="rotate(315 280 360)"/>
+      <path d="M280 450 C300 510 320 570 280 630 C240 570 260 510 280 450"/>
+      <path d="M190 360 C150 340 120 310 90 360 C120 410 150 390 190 360"/>
+      <path d="M370 360 C410 340 440 310 470 360 C440 410 410 390 370 360"/>
+      <circle cx="130" cy="160" r="45"/><circle cx="130" cy="160" r="25"/>
+      <ellipse cx="130" cy="105" rx="14" ry="30" transform="rotate(0 130 160)"/>
+      <ellipse cx="130" cy="105" rx="14" ry="30" transform="rotate(60 130 160)"/>
+      <ellipse cx="130" cy="105" rx="14" ry="30" transform="rotate(120 130 160)"/>
+      <ellipse cx="130" cy="105" rx="14" ry="30" transform="rotate(180 130 160)"/>
+      <ellipse cx="130" cy="105" rx="14" ry="30" transform="rotate(240 130 160)"/>
+      <ellipse cx="130" cy="105" rx="14" ry="30" transform="rotate(300 130 160)"/>
+      <circle cx="380" cy="580" r="38"/>
+      <ellipse cx="380" cy="534" rx="12" ry="26" transform="rotate(0 380 580)"/>
+      <ellipse cx="380" cy="534" rx="12" ry="26" transform="rotate(60 380 580)"/>
+      <ellipse cx="380" cy="534" rx="12" ry="26" transform="rotate(120 380 580)"/>
+      <ellipse cx="380" cy="534" rx="12" ry="26" transform="rotate(180 380 580)"/>
+      <ellipse cx="380" cy="534" rx="12" ry="26" transform="rotate(240 380 580)"/>
+      <ellipse cx="380" cy="534" rx="12" ry="26" transform="rotate(300 380 580)"/>
+      <path d="M280 450 Q255 520 230 600 Q215 650 180 700" stroke-width="0.8"/>
+      <path d="M280 450 Q305 520 330 600 Q345 650 380 700" stroke-width="0.8"/>
+      <circle cx="230" cy="600" r="5" fill="#7A6253"/><circle cx="218" cy="618" r="3.5" fill="#7A6253"/>
+      <circle cx="335" cy="605" r="5" fill="#7A6253"/><circle cx="348" cy="620" r="3.5" fill="#7A6253"/>
+      <path d="M130 205 Q110 260 100 330 Q90 380 110 440" stroke-width="0.8"/>
+      <path d="M130 205 Q150 260 155 330 Q160 380 145 440" stroke-width="0.8"/>
+    </g>
+  </svg>
+
+  <div class="hero-grid" style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 48px;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;width:100%;">
+
+    <!-- Left: copy -->
+    <div>
+      <p class="label reveal" style="transition-delay:.05s">Kozmetičko-frizerski salon · Beograd</p>
+
+      <h1 class="display reveal" style="font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;line-height:0.93;letter-spacing:-0.02em;color:#3D2E28;margin:20px 0;transition-delay:.12s">
+        Lepota<br>koja<br><em style="font-style:italic;color:#C24371;">inspiriše</em>
+      </h1>
+
+      <span class="rule reveal" style="transition-delay:.18s"></span>
+
+      <p class="reveal" style="font-size:14px;font-weight:300;line-height:1.85;color:#7A6253;max-width:420px;margin-bottom:36px;transition-delay:.22s">
+        Salon Vebira je vaše mesto odmora i nege. Specijalizovani smo za prirodna i biljna rešenja — tretmane koji kombinuju estetiku i zdravlje vaše kože.
+      </p>
+
+      <div class="reveal" style="display:flex;gap:14px;flex-wrap:wrap;transition-delay:.28s">
+        <a href="#kontakt"  class="btn btn-solid">Zakažite termin</a>
+        <a href="#usluge"   class="btn btn-ghost">Naše usluge</a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row reveal" style="display:flex;gap:40px;margin-top:52px;padding-top:40px;border-top:1px solid #E8D6CC;transition-delay:.35s">
+        <div class="stat"><p class="stat-num">5+</p><p class="stat-lbl">God. iskustva</p></div>
+        <div class="stat"><p class="stat-num">500+</p><p class="stat-lbl">Klijenata</p></div>
+        <div class="stat"><p class="stat-num">100%</p><p class="stat-lbl">Prirodni prep.</p></div>
+      </div>
+    </div>
+
+    <!-- Right: image frame -->
+    <div class="hero-img-wrap reveal" style="position:relative;transition-delay:.2s">
+      <!-- Organic-shaped frame -->
+      <div style="position:relative;width:100%;aspect-ratio:3/4;border-radius:48% 52% 62% 38% / 44% 48% 52% 56%;overflow:hidden;background:linear-gradient(160deg,#E8D6CC 0%,#F3E4DC 100%);">
+        <img src="brand-assets/Logo/girl-from-logo-transparent.png" alt="Ilustracija salon Vebira"
+             style="width:100%;height:100%;object-fit:contain;padding:10%;mix-blend-mode:multiply;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(194,67,113,0.12) 100%);"></div>
+      </div>
+
+      <!-- Floating badge — location -->
+      <div style="position:absolute;bottom:-16px;left:-20px;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 4px 24px rgba(122,98,83,0.14);display:flex;align-items:center;gap:12px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#C24371,#A0355A);display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/></svg>
+        </div>
+        <div>
+          <p style="font-size:11px;font-weight:600;color:#3D2E28;line-height:1.2;">Ratka Mitrovića 162/20</p>
+          <p style="font-size:10px;color:#7A6253;">Beograd</p>
+        </div>
+      </div>
+
+      <!-- Floating badge — rating -->
+      <div style="position:absolute;top:24px;right:-20px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 4px 24px rgba(122,98,83,0.14);">
+        <div style="display:flex;gap:3px;margin-bottom:5px;">
+          <svg width="11" height="11" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="font-size:11px;font-weight:600;color:#3D2E28;">5.0 Google</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll cue -->
+  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);text-align:center;">
+    <p style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#B5A69C;margin-bottom:10px;">Scroll</p>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     USLUGE
+═══════════════════════════════════════════════ -->
+<section id="usluge" style="padding:96px 48px;position:relative;overflow:hidden;">
+  <!-- Background accent -->
+  <div style="position:absolute;top:0;right:0;width:35%;height:100%;background:radial-gradient(ellipse at right,rgba(232,214,204,0.28) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <!-- Header -->
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <p class="label">Šta nudimo</p>
+      <h2 class="section-h2 reveal" style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;letter-spacing:-0.01em;margin-top:12px;transition-delay:.06s">Naše usluge</h2>
+      <span class="rule centered"></span>
+      <p style="font-size:13px;color:#7A6253;max-width:480px;margin:0 auto;line-height:1.8;">Širok spektar tretmana prilagođenih vašim potrebama, uz prirodne i biljna rešenja</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="svc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <!-- Tretmani lica -->
+      <div class="svc-card reveal" style="transition-delay:.05s">
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#3D2E28;margin-bottom:8px;">Tretmani lica</h3>
+        <p style="font-size:12px;color:#7A6253;line-height:1.75;margin-bottom:20px;">Profesionalna nega kože uz prirodne i biljna preparate koji obnavljaju i revitalizuju.</p>
+        <div style="border-top:1px solid #F0E8E2;padding-top:16px;">
+          <div class="price-row"><span>Tretman lica</span><span class="price">3.000 RSD</span></div>
+          <div class="price-row"><span>Polutretman lica</span><span class="price">200 RSD</span></div>
+          <div class="price-row"><span>Masaža lica</span><span class="price">700 RSD</span></div>
+        </div>
+      </div>
+
+      <!-- Parafinsko — featured -->
+      <div class="svc-card featured reveal" style="transition-delay:.1s">
+        <div style="display:inline-block;background:rgba(255,255,255,0.2);border-radius:50px;padding:4px 14px;margin-bottom:14px;">
+          <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.9);">Premium</p>
+        </div>
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#fff;margin-bottom:8px;">Parafinsko pakovanje</h3>
+        <p style="font-size:12px;color:rgba(255,255,255,0.82);line-height:1.75;margin-bottom:20px;">Toplotna terapija bogata vitaminom E i eteričnim uljima. Dubinska hidratacija, otvorene pore, vidno pomlađena koža odmah posle prvog tretmana.</p>
+        <div style="border-top:1px solid rgba(255,255,255,0.2);padding-top:16px;">
+          <div class="price-row"><span style="color:rgba(255,255,255,0.85)">Parafinsko pakovanje lica</span><span class="price">1.500 RSD</span></div>
+          <div class="price-row"><span style="color:rgba(255,255,255,0.85)">Sa masažom</span><span class="price">1.300 RSD</span></div>
+        </div>
+      </div>
+
+      <!-- Depilacija -->
+      <div class="svc-card reveal" style="transition-delay:.15s">
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.5" stroke-linecap="round"><path d="M5 3l14 9-14 9V3z"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#3D2E28;margin-bottom:8px;">Depilacija hladnim voskom</h3>
+        <p style="font-size:12px;color:#7A6253;line-height:1.75;margin-bottom:20px;">Patrone za jednokratnu upotrebu — viša higijena, manja bolnost, biljni ekstrakti. Idealno za osetljivu kožu.</p>
+        <div style="border-top:1px solid #F0E8E2;padding-top:16px;">
+          <div class="price-row"><span>Cele noge</span><span class="price">1.500 RSD</span></div>
+          <div class="price-row"><span>Cele noge + intimno</span><span class="price">2.000 RSD</span></div>
+          <div class="price-row"><span>Polu noge + intimno</span><span class="price">1.200 RSD</span></div>
+          <div class="price-row"><span>Polu noge</span><span class="price">700 RSD</span></div>
+          <div class="price-row"><span>Intimna depilacija</span><span class="price">800 RSD</span></div>
+          <div class="price-row"><span>Ruke</span><span class="price">700 RSD</span></div>
+          <div class="price-row"><span>Leđa</span><span class="price">1.000 RSD</span></div>
+          <div class="price-row"><span>Pazuha</span><span class="price">500 RSD</span></div>
+        </div>
+      </div>
+
+      <!-- Medicinski pedikir -->
+      <div class="svc-card reveal" style="transition-delay:.05s">
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.5" stroke-linecap="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#3D2E28;margin-bottom:8px;">Pedikir &amp; nokti</h3>
+        <p style="font-size:12px;color:#7A6253;line-height:1.75;margin-bottom:20px;">Medicinski pedikir sa sterilnim instrumentima za tretman uzroka tegoba, uz estetski pedikir za savršen izgled.</p>
+        <div style="border-top:1px solid #F0E8E2;padding-top:16px;">
+          <div class="price-row"><span>Medicinski pedikir</span><span class="price">2.200 RSD</span></div>
+          <div class="price-row"><span>Estetski pedikir</span><span class="price">1.800 RSD</span></div>
+          <div class="price-row"><span>Gel lak</span><span class="price">1.500 RSD</span></div>
+        </div>
+      </div>
+
+      <!-- Nega tela -->
+      <div class="svc-card reveal" style="transition-delay:.1s">
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.5" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#3D2E28;margin-bottom:8px;">Nega tela</h3>
+        <p style="font-size:12px;color:#7A6253;line-height:1.75;margin-bottom:20px;">Intenzivna anticelulit masaža koja poboljšava cirkulaciju, smanjuje celulit i opušta mišiće. Vidljivi efekti odmah.</p>
+        <div style="border-top:1px solid #F0E8E2;padding-top:16px;">
+          <div class="price-row"><span>Anticelulit masaža</span><span class="price">2.500 RSD</span></div>
+        </div>
+      </div>
+
+      <!-- Obrve -->
+      <div class="svc-card reveal" style="transition-delay:.15s;background:linear-gradient(135deg,#FAF7F2 0%,#F5EAE3 100%);">
+        <div class="icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.5" stroke-linecap="round"><path d="M2 9c4.5-3 9-3 11.5 0S18 12 22 9"/><path d="M7 15c1.5-1.5 3-2 5-1.5"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#3D2E28;margin-bottom:8px;">Obrve &amp; nausnice</h3>
+        <p style="font-size:12px;color:#7A6253;line-height:1.75;margin-bottom:20px;">Precizno oblikovanje hladnim voskom koje ističe prirodnu lepotu vašeg lica bez iritacije kože.</p>
+        <div style="border-top:1px solid #F0E8E2;padding-top:16px;">
+          <div class="price-row"><span>Korekcija obrva</span><span class="price">500 RSD</span></div>
+          <div class="price-row"><span>Depilacija nausnica</span><span class="price">400 RSD</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="text-align:center;margin-top:48px;transition-delay:.1s">
+      <a href="#kontakt" class="btn btn-solid">Zakažite tretman</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     O NAMA
+═══════════════════════════════════════════════ -->
+<section id="o-nama" style="padding:96px 48px;background:linear-gradient(135deg,#F3EAE3 0%,#FAF7F2 50%,#F3EAE3 100%);overflow:hidden;position:relative;">
+
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="hero-grid">
+
+    <!-- Image side -->
+    <div class="reveal" style="position:relative;">
+      <div style="border-radius:40% 60% 55% 45% / 50% 45% 55% 50%;overflow:hidden;aspect-ratio:4/5;background:#E8D6CC;position:relative;">
+        <img src="brand-assets/Logo/girl-from-logo-transparent.png" alt="Salon Vebira"
+             style="width:100%;height:100%;object-fit:contain;padding:48px;mix-blend-mode:multiply;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,transparent 40%,rgba(194,67,113,0.1) 100%);"></div>
+      </div>
+
+      <!-- Accent circle -->
+      <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(194,67,113,0.18),rgba(232,214,204,0.3));"></div>
+
+      <!-- Stat bubble -->
+      <div style="position:absolute;bottom:32px;right:-24px;background:#fff;border-radius:20px;padding:20px 24px;box-shadow:0 4px 28px rgba(122,98,83,0.14);">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1;color:#C24371;">100%</p>
+        <p style="font-size:11px;color:#7A6253;margin-top:4px;font-weight:500;">prirodni preparati</p>
+      </div>
+    </div>
+
+    <!-- Text side -->
+    <div class="reveal" style="transition-delay:.08s">
+      <p class="label">Naša priča</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;letter-spacing:-0.01em;color:#3D2E28;margin-top:12px;line-height:1.05;">O salonu<br><em style="color:#C24371;">Vebira</em></h2>
+      <span class="rule"></span>
+      <p style="font-size:14px;color:#7A6253;line-height:1.9;margin-bottom:36px;">
+        Salon Vebira je kozmetičko-frizerski salon u Beogradu koji se izdvaja posebnim pristupom nezi kože lica i tela. Fokus na <strong style="color:#3D2E28;font-weight:500">prirodna i biljna rešenja</strong> u tretmanima čini nas drugačijim — kombinujemo estetiku i zdravlje u svakom tretmanu.
+      </p>
+
+      <!-- 3 differentiators -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+
+        <div class="diff-item reveal" style="transition-delay:.12s">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,#C24371,#A0355A);display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-size:13px;font-weight:600;color:#3D2E28;margin-bottom:4px;">Hladni vosak — više higijene</h4>
+            <p style="font-size:12px;color:#7A6253;line-height:1.7;">Patrone za jednokratnu upotrebu eliminišu rizik od infekcija. Blaži, naturalni ekstrakti, idealan za osetljivu kožu.</p>
+          </div>
+        </div>
+
+        <div class="diff-item reveal" style="transition-delay:.17s">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,rgba(194,67,113,0.14),rgba(232,214,204,0.4));display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.8" stroke-linecap="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-size:13px;font-weight:600;color:#3D2E28;margin-bottom:4px;">Medicinski pedikir — zdravlje stopala</h4>
+            <p style="font-size:12px;color:#7A6253;line-height:1.7;">Stručna dijagnostika i tretman uzroka tegoba. Sterilni instrumentarijum i klinički protokoli rada.</p>
+          </div>
+        </div>
+
+        <div class="diff-item reveal" style="transition-delay:.22s">
+          <div style="width:44px;height:44px;min-width:44px;border-radius:12px;background:linear-gradient(135deg,rgba(194,67,113,0.14),rgba(232,214,204,0.4));display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-size:13px;font-weight:600;color:#3D2E28;margin-bottom:4px;">Parafinsko pakovanje — premium hidratacija</h4>
+            <p style="font-size:12px;color:#7A6253;line-height:1.7;">Vitamin E i eterična ulja za vidno pomlađenu kožu odmah posle prvog tretmana. Idealno za suvu kožu.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     PRE I POSLE
+═══════════════════════════════════════════════ -->
+<section id="pre-posle" style="padding:96px 48px;background:#FAF7F2;position:relative;overflow:hidden;">
+  <div style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(232,214,204,0.4) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <p class="label">Rezultati govore</p>
+      <h2 class="section-h2" style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;letter-spacing:-0.01em;margin-top:12px;">Pre i posle</h2>
+      <span class="rule centered"></span>
+      <p style="font-size:13px;color:#7A6253;max-width:440px;margin:0 auto;line-height:1.8;">Pravi rezultati naših tretmana — transparentnost je deo naše filozofije</p>
+    </div>
+
+    <div class="ba-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px;align-items:start;">
+
+      <!-- Large BA card -->
+      <div class="ba-card reveal" style="transition-delay:.05s">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:20px;overflow:hidden;aspect-ratio:4/3;">
+          <div style="position:relative;overflow:hidden;">
+            <img src="https://placehold.co/400x320/E8D6CC/7A6253?text=Pre" alt="Pre tretmana lica" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(61,46,40,0.55) 0%,transparent 55%);"></div>
+            <span class="ba-label pre">Pre</span>
+          </div>
+          <div style="position:relative;overflow:hidden;">
+            <img src="https://placehold.co/400x320/F5EAE3/C24371?text=Posle" alt="Posle tretmana lica" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(194,67,113,0.35) 0%,transparent 55%);"></div>
+            <span class="ba-label post">Posle</span>
+          </div>
+        </div>
+        <p style="font-size:12px;font-weight:500;color:#3D2E28;margin-top:14px;text-align:center;">Tretman lica — hidratacija &amp; revitalizacija</p>
+      </div>
+
+      <!-- Small BA 2 -->
+      <div class="ba-card reveal" style="transition-delay:.1s">
+        <div style="display:grid;grid-template-rows:1fr 1fr;gap:3px;border-radius:20px;overflow:hidden;aspect-ratio:3/4;">
+          <div style="position:relative;overflow:hidden;">
+            <img src="https://placehold.co/300x200/E8D6CC/7A6253?text=Pre" alt="Pre depilacije" style="width:100%;height:100%;object-fit:cover;">
+            <span class="ba-label pre" style="font-size:8px;padding:3px 8px;">Pre</span>
+          </div>
+          <div style="position:relative;overflow:hidden;">
+            <img src="https://placehold.co/300x200/F5EAE3/C24371?text=Posle" alt="Posle depilacije" style="width:100%;height:100%;object-fit:cover;">
+            <span class="ba-label post" style="font-size:8px;padding:3px 8px;">Posle</span>
+          </div>
+        </div>
+        <p style="font-size:12px;font-weight:500;color:#3D2E28;margin-top:14px;text-align:center;">Depilacija hladnim voskom</p>
+      </div>
+
+      <!-- Small BA 3 -->
+      <div class="ba-card reveal" style="transition-delay:.15s">
+        <div style="display:grid;grid-template-rows:1fr 1fr;gap:3px;border-radius:20px;overflow:hidden;aspect-ratio:3/4;">
+          <div style="position:relative;overflow:hidden;">
+            <img src="https://placehold.co/300x200/E8D6CC/7A6253?text=Pre" alt="Pre medicinskog pedikira" style="width:100%;height:100%;object-fit:cover;">
+            <span class="ba-label pre" style="font-size:8px;padding:3px 8px;">Pre</span>
+          </div>
+          <div style="position:relative;overflow:hidden;">
+            <img src="https://placehold.co/300x200/F5EAE3/C24371?text=Posle" alt="Posle medicinskog pedikira" style="width:100%;height:100%;object-fit:cover;">
+            <span class="ba-label post" style="font-size:8px;padding:3px 8px;">Posle</span>
+          </div>
+        </div>
+        <p style="font-size:12px;font-weight:500;color:#3D2E28;margin-top:14px;text-align:center;">Medicinski pedikir</p>
+      </div>
+
+    </div>
+
+    <p class="reveal" style="text-align:center;font-size:11px;color:#B5A69C;margin-top:24px;letter-spacing:0.08em;transition-delay:.1s">
+      * Fotografije će biti zamenjene stvarnim rezultatima klijenata
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     UTISCI / TESTIMONIALS
+═══════════════════════════════════════════════ -->
+<section id="utisci" style="padding:96px 48px;background:linear-gradient(135deg,#F3EAE3 0%,#FAF7F2 100%);">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="reveal" style="text-align:center;margin-bottom:56px;">
+      <p class="label">Zadovoljni klijenti</p>
+      <h2 class="section-h2" style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;letter-spacing:-0.01em;margin-top:12px;">Utisci</h2>
+      <span class="rule centered"></span>
+
+      <!-- Rating overview -->
+      <div style="display:inline-flex;align-items:center;gap:24px;margin-top:8px;padding:20px 36px;background:#fff;border-radius:50px;box-shadow:0 2px 0 #E8D6CC,0 4px 20px rgba(122,98,83,0.08);">
+        <div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;line-height:1;color:#C24371;">5.0</p>
+          <div style="display:flex;gap:3px;margin:4px 0;">
+            <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p style="font-size:10px;color:#7A6253;letter-spacing:0.08em;">Google recenzije</p>
+        </div>
+        <div style="width:1px;height:48px;background:#E8D6CC;"></div>
+        <div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1;color:#3D2E28;">100+</p>
+          <p style="font-size:10px;color:#7A6253;margin-top:4px;letter-spacing:0.08em;">recenzija</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="t-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <div class="t-card reveal" style="transition-delay:.05s">
+        <div class="stars">
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="font-size:14px;color:#5C4A41;line-height:1.85;position:relative;z-index:1;margin-bottom:24px;">
+          Depilacija hladnim voskom je toliko bolja od one toplom — gotovo bez bola, koža savršena. Posebno preporučujem za osetljivu kožu. Dolaziću uvek!
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid #F0E8E2;padding-top:18px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#E8D6CC,#FAF7F2);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#7A6253;">A</span>
+          </div>
+          <div>
+            <p style="font-size:13px;font-weight:600;color:#3D2E28;">Ana M.</p>
+            <p style="font-size:11px;color:#7A6253;">Depilacija hladnim voskom</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-card reveal" style="transition-delay:.1s;border-top:3px solid #C24371;">
+        <div class="stars">
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="font-size:14px;color:#5C4A41;line-height:1.85;position:relative;z-index:1;margin-bottom:24px;">
+          Uradila sam medicinski pedikir i razlika je neverovatna. Imala sam problem sa urasenim noktima mesecima — posle jednog tretmana, problem rešen. Profesionalno i stručno.
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid #F0E8E2;padding-top:18px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C24371,#A0355A);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;">M</span>
+          </div>
+          <div>
+            <p style="font-size:13px;font-weight:600;color:#3D2E28;">Milica T.</p>
+            <p style="font-size:11px;color:#7A6253;">Medicinski pedikir</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-card reveal" style="transition-delay:.15s">
+        <div class="stars">
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" class="star-svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p style="font-size:14px;color:#5C4A41;line-height:1.85;position:relative;z-index:1;margin-bottom:24px;">
+          Parafinsko pakovanje lica je čudesno! Koža mi je bila suva i umorna, a posle tretmana — potpuno nova žena. Miris je predivan, atmosfera opuštajuća. Dolazim svaki mesec!
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid #F0E8E2;padding-top:18px;">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#E8D6CC,#FAF7F2);display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#7A6253;">J</span>
+          </div>
+          <div>
+            <p style="font-size:13px;font-weight:600;color:#3D2E28;">Jelena K.</p>
+            <p style="font-size:11px;color:#7A6253;">Parafinsko pakovanje lica</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     KONTAKT
+═══════════════════════════════════════════════ -->
+<section id="kontakt" style="padding:96px 48px;background:#FAF7F2;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;right:0;width:40%;height:100%;background:radial-gradient(ellipse at right top,rgba(194,67,113,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <p class="label">Javite nam se</p>
+      <h2 class="section-h2" style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;letter-spacing:-0.01em;margin-top:12px;">Zakažite termin</h2>
+      <span class="rule centered"></span>
+      <p style="font-size:13px;color:#7A6253;max-width:480px;margin:0 auto;line-height:1.8;">
+        Popunite formu ili nas pozovite direktno na <a href="tel:0641654676" style="color:#C24371;font-weight:600;text-decoration:none;">064 165 4676</a>
+      </p>
+    </div>
+
+    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+
+      <!-- Form -->
+      <div class="reveal" style="background:#fff;border-radius:28px;padding:40px;box-shadow:0 2px 0 #E8D6CC,0 8px 40px rgba(122,98,83,0.08);">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:#3D2E28;margin-bottom:28px;">Pošaljite poruku</h3>
+
+        <form id="contact-form" onsubmit="handleSubmit(event)" novalidate style="display:flex;flex-direction:column;gap:18px;">
+          <div>
+            <label for="name" class="field-label">Ime i prezime <span style="color:#C24371;">*</span></label>
+            <input type="text" id="name" name="name" required class="field-input" placeholder="Vaše ime i prezime">
+          </div>
+          <div>
+            <label for="phone" class="field-label">Telefon <span style="color:#C24371;">*</span></label>
+            <input type="tel" id="phone" name="phone" required class="field-input" placeholder="+381 6x xxx xxxx">
+          </div>
+          <div>
+            <label for="email" class="field-label">Email</label>
+            <input type="email" id="email" name="email" class="field-input" placeholder="vasa@email.com">
+          </div>
+          <div>
+            <label for="service" class="field-label">Usluga <span style="color:#C24371;">*</span></label>
+            <select id="service" name="service" required class="field-input" style="cursor:pointer;background-image:url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"8\" viewBox=\"0 0 12 8\"><path d=\"M1 1l5 5 5-5\" stroke=\"%237A6253\" stroke-width=\"1.5\" fill=\"none\" stroke-linecap=\"round\"/></svg>');background-repeat:no-repeat;background-position:right 16px center;">
+              <option value="" disabled selected>Izaberite uslugu</option>
+              <option>Tretman lica</option>
+              <option>Parafinsko pakovanje lica</option>
+              <option>Masaža lica</option>
+              <option>Depilacija hladnim voskom</option>
+              <option>Anticelulit masaža</option>
+              <option>Medicinski pedikir</option>
+              <option>Estetski pedikir</option>
+              <option>Gel lak</option>
+              <option>Korekcija obrva</option>
+              <option>Drugo</option>
+            </select>
+          </div>
+          <div>
+            <label for="message" class="field-label">Poruka</label>
+            <textarea id="message" name="message" rows="4" class="field-input" placeholder="Napišite nam nešto..." style="resize:none;"></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid" style="width:100%;margin-top:4px;">
+            Zakažite termin
+          </button>
+        </form>
+
+        <div id="success-msg" style="display:none;text-align:center;padding:48px 0;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#C24371,#A0355A);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#3D2E28;margin-bottom:8px;">Hvala vam!</h4>
+          <p style="font-size:13px;color:#7A6253;line-height:1.7;">Vaša poruka je primljena. Javićemo vam se u najkraćem roku.</p>
+        </div>
+      </div>
+
+      <!-- Map + info -->
+      <div class="reveal" style="display:flex;flex-direction:column;gap:16px;transition-delay:.08s">
+
+        <!-- Google Map -->
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?q=Ratka+Mitrovića+162,+Beograd,+Srbija&output=embed&hl=sr&z=15"
+            width="100%" height="280" style="border:0;display:block;"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Lokacija Salon Vebira — Ratka Mitrovića 162/20, Beograd">
+          </iframe>
+        </div>
+
+        <!-- Info cards -->
+        <div class="info-card" style="cursor:default;">
+          <div class="info-icon" style="background:linear-gradient(135deg,rgba(194,67,113,0.12),rgba(232,214,204,0.4));">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#C24371"/></svg>
+          </div>
+          <div>
+            <p style="font-size:10px;color:#7A6253;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">Adresa</p>
+            <p style="font-size:13px;font-weight:600;color:#3D2E28;">Ratka Mitrovića 162/20, Beograd</p>
+          </div>
+        </div>
+
+        <a href="tel:0641654676" class="info-card">
+          <div class="info-icon" style="background:linear-gradient(135deg,#C24371,#A0355A);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <p style="font-size:10px;color:#7A6253;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">Telefon</p>
+            <p style="font-size:13px;font-weight:600;color:#3D2E28;">064 165 4676</p>
+          </div>
+        </a>
+
+        <a href="mailto:salonvebira@gmail.com" class="info-card">
+          <div class="info-icon" style="background:linear-gradient(135deg,rgba(194,67,113,0.12),rgba(232,214,204,0.4));">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C24371" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <p style="font-size:10px;color:#7A6253;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">Email</p>
+            <p style="font-size:13px;font-weight:600;color:#3D2E28;">salonvebira@gmail.com</p>
+          </div>
+        </a>
+
+        <!-- Hours -->
+        <div class="hours-card">
+          <p style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#7A6253;margin-bottom:16px;">Radno vreme</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:13px;color:#7A6253;">Ponedeljak – Petak</span>
+              <span style="font-size:13px;font-weight:600;color:#3D2E28;">09:00 – 20:00</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:13px;color:#7A6253;">Subota</span>
+              <span style="font-size:13px;font-weight:600;color:#3D2E28;">09:00 – 17:00</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;">
+              <span style="font-size:13px;color:#7A6253;">Nedelja</span>
+              <span style="font-size:13px;color:#B5A69C;font-style:italic;">Po dogovoru</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer>
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px;">
+
+    <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);">
+
+      <!-- Brand -->
+      <div>
+        <img src="brand-assets/Logo/full-logo-transparent.png" alt="Salon Vebira" style="height:48px;width:auto;filter:brightness(0) invert(1);margin-bottom:20px;opacity:0.9;">
+        <p style="font-size:13px;line-height:1.8;max-width:280px;color:rgba(255,255,255,0.5);">
+          Kozmetičko-frizerski salon u Beogradu. Prirodna rešenja, proverene metode, vaša lepota i zdravlje na prvom mestu.
+        </p>
+      </div>
+
+      <!-- Nav -->
+      <div>
+        <p style="font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Navigacija</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="#usluge"    style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Usluge</a>
+          <a href="#o-nama"    style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">O nama</a>
+          <a href="#pre-posle" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Pre i posle</a>
+          <a href="#utisci"    style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Utisci</a>
+          <a href="#kontakt"   style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Kontakt</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p style="font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:20px;">Kontakt</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <p style="font-size:13px;color:rgba(255,255,255,0.6);">Ratka Mitrovića 162/20<br>Beograd</p>
+          <a href="tel:0641654676" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">064 165 4676</a>
+          <a href="mailto:salonvebira@gmail.com" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#C24371'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">salonvebira@gmail.com</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <p style="font-size:11px;color:rgba(255,255,255,0.25);">© 2025 Salon Vebira. Sva prava zadržana.</p>
+      <p style="font-size:11px;color:rgba(255,255,255,0.2);">Kozmetički salon · Beograd</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
+<script>
+  /* ── Responsive: show/hide hamburger ── */
+  const hamBtn  = document.getElementById('ham-btn');
+  const mobMenu = document.getElementById('mob-menu');
+  const desktopLinks = document.querySelector('.hidden-mob');
+
+  function applyResponsive() {
+    if (window.innerWidth < 768) {
+      hamBtn.style.display = 'flex';
+      desktopLinks.style.display = 'none';
+    } else {
+      hamBtn.style.display = 'none';
+      desktopLinks.style.display = 'flex';
+      mobMenu.classList.remove('open');
+      hamBtn.classList.remove('open');
+    }
+  }
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+
+  /* ── Mobile menu toggle ── */
+  hamBtn.addEventListener('click', () => {
+    mobMenu.classList.toggle('open');
+    hamBtn.classList.toggle('open');
+  });
+  function closeMenu() {
+    mobMenu.classList.remove('open');
+    hamBtn.classList.remove('open');
+  }
+
+  /* ── Navbar scroll ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Reveal on scroll ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  /* ── Active nav highlight ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('a.nav-link');
+  window.addEventListener('scroll', () => {
+    let active = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) active = s.id;
+    });
+    navLinks.forEach(l => {
+      l.style.color = l.getAttribute('href') === `#${active}` ? '#C24371' : '';
+    });
+  }, { passive: true });
+
+  /* ── Form submit ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(f => {
+      if (!f.value.trim()) {
+        f.style.borderColor = '#C24371';
+        f.style.background = 'rgba(194,67,113,0.03)';
+        valid = false;
+      } else {
+        f.style.borderColor = '#E8D6CC';
+        f.style.background = '#fff';
+      }
+    });
+    if (!valid) return;
+    form.style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
