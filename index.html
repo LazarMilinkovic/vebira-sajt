@@ -35,7 +35,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
 
     body {
       font-family: 'Jost', sans-serif;
@@ -229,6 +229,7 @@
       letter-spacing: 0.22em; text-transform: uppercase;
       text-decoration: none; cursor: pointer;
       border: none;
+      white-space: nowrap;
       position: relative; overflow: hidden;
       transition: transform 0.18s ease, box-shadow 0.25s ease;
     }
@@ -427,6 +428,28 @@
       #testi-layout { grid-template-columns: 1fr !important; }
       #testi-nav    { flex-direction: row !important; justify-content: center; }
       #testi-dots   { flex-direction: row !important; }
+
+      /* ── FIX: Nav CTA – ukloni višak margine i spreci prelom teksta ── */
+      #nav-cta { margin-left: 8px !important; }
+
+      /* ── FIX: O-Nama floating stat – zadrži unutar slike ── */
+      #o-nama .reveal-left > .reveal-scale {
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      /* ── FIX: Kontakt forma i info kolona – manji padding na mobilnom ── */
+      #kontakt-forma .reveal-left,
+      #kontakt-forma .reveal-right { padding: 36px 24px !important; }
+
+      /* ── FIX: Featured service blokovi – manji padding na mobilnom ── */
+      .svc-featured-block { padding: 32px 20px !important; }
+
+      /* ── FIX: Cenovnik kolone – manji padding na mobilnom ── */
+      #price-col-1, #price-col-2, #price-col-3 { padding: 32px 24px !important; }
+
+      /* ── FIX: CTA bar – manji horizontalni padding na mobilnom ── */
+      .cta-bar { padding-left: 24px !important; padding-right: 24px !important; }
     }
     @media (max-width: 480px) {
       .hero-title { font-size: 44px !important; }
