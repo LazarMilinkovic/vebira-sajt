@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Politika kolačića — Salon Vebira. Saznajte koje kolačiće koristimo i kako da upravljate vašim preferencijama.">
+  <title>Politika kolačića | Salon Vebira</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --linen:      #F0EAE1;
+      --sand:       #E6D9CC;
+      --parchment:  #FAF7F3;
+      --warm-white: #FDFBF8;
+      --ink:        #1C1510;
+      --taupe:      #6B5A4E;
+      --rose:       #C24371;
+      --rose-dk:    #9B3158;
+      --bark:       #8A7362;
+      --espresso:   #2A1E18;
+      --border:     #DDD1C3;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--parchment);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--parchment); }
+    ::-webkit-scrollbar-thumb { background: var(--sand); border-radius: 2px; }
+
+    /* ── NAV ── */
+    .legal-nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--espresso);
+      padding: 22px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .back-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px; font-weight: 400;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: color 0.22s ease;
+    }
+    .back-link:hover { color: rgba(255,255,255,0.78); }
+    .back-link:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .legal-hero {
+      background: var(--espresso);
+      padding: 80px 56px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .legal-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 75% at 100% 50%, rgba(194,67,113,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 0% 100%, rgba(194,67,113,0.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .legal-hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(194,67,113,0.22) 30%, rgba(194,67,113,0.44) 50%, rgba(194,67,113,0.22) 70%, transparent 100%);
+    }
+
+    /* ── CONTENT ── */
+    .legal-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 56px 108px;
+    }
+
+    .legal-intro {
+      font-size: 16px;
+      line-height: 1.82;
+      color: var(--taupe);
+      margin-bottom: 60px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section { padding-top: 48px; }
+    .legal-section + .legal-section {
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .section-num {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--rose); opacity: 0.65;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.2vw, 25px);
+      font-weight: 500;
+      color: var(--espresso);
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .lp {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--taupe);
+    }
+    .lp + .lp { margin-top: 14px; }
+
+    .ll {
+      list-style: none;
+      margin: 16px 0;
+    }
+    .ll li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 5px 0;
+      font-size: 15.5px;
+      line-height: 1.72;
+      color: var(--taupe);
+    }
+    .ll li::before {
+      content: '';
+      width: 14px;
+      min-width: 14px;
+      height: 1px;
+      background: var(--rose);
+      opacity: 0.5;
+      flex-shrink: 0;
+      margin-top: 13px;
+    }
+
+    /* Cookie type cards */
+    .cookie-type {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 24px 28px;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.55);
+    }
+    .cookie-type + .cookie-type { margin-top: 14px; }
+    .cookie-type-label {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px;
+    }
+    .cookie-badge {
+      font-family: 'Jost', sans-serif;
+      font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    .badge-required {
+      background: rgba(194,67,113,0.1);
+      color: var(--rose);
+      border: 1px solid rgba(194,67,113,0.2);
+    }
+    .badge-analytics {
+      background: rgba(107,90,78,0.1);
+      color: var(--taupe);
+      border: 1px solid rgba(107,90,78,0.2);
+    }
+    .badge-marketing {
+      background: rgba(42,30,24,0.07);
+      color: var(--bark);
+      border: 1px solid rgba(42,30,24,0.12);
+    }
+    .cookie-type-name {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px; font-weight: 500;
+      color: var(--ink);
+    }
+    .cookie-type-desc {
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--taupe);
+    }
+
+    /* Third-party table */
+    .tp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    .tp-item + .tp-item { margin-top: 12px; }
+    .tp-name {
+      background: rgba(42,30,24,0.04);
+      border-right: 1px solid var(--border);
+      padding: 18px 20px;
+      display: flex; align-items: center;
+    }
+    .tp-name-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px; font-weight: 500;
+      color: var(--ink);
+    }
+    .tp-desc {
+      padding: 18px 22px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--taupe);
+    }
+
+    /* Inline link */
+    a.il {
+      color: var(--rose);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(194,67,113,0.28);
+      transition: border-color 0.2s ease;
+    }
+    a.il:hover { border-color: var(--rose); }
+    a.il:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; border-radius: 1px; }
+
+    /* Note box */
+    .note-box {
+      background: rgba(240,234,225,0.6);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 18px 22px;
+      margin-top: 20px;
+      font-size: 14.5px;
+      line-height: 1.72;
+      color: var(--bark);
+    }
+
+    /* ── FOOTER ── */
+    .legal-footer {
+      background: var(--espresso);
+      position: relative;
+      overflow: hidden;
+    }
+    .legal-footer::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(194,67,113,0.28) 25%, rgba(194,67,113,0.55) 50%, rgba(194,67,113,0.28) 75%, transparent 100%);
+    }
+
+    .fp-link {
+      font-size: 12px; font-weight: 300;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      transition: color 0.22s ease;
+    }
+    .fp-link:hover { color: rgba(255,255,255,0.72); }
+    .fp-link:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; border-radius: 2px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .legal-nav  { padding: 18px 24px; }
+      .legal-hero { padding: 60px 24px 56px; }
+      .legal-wrap { padding: 56px 24px 80px; }
+      .footer-pad { padding: 56px 24px 32px !important; }
+      .footer-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 10px !important; }
+      .tp-item { grid-template-columns: 1fr; }
+      .tp-name { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ── NAV ── -->
+<nav class="legal-nav" role="navigation" aria-label="Pravna navigacija">
+  <a href="index.html" aria-label="Salon Vebira — Početna strana">
+    <img src="resources/Vebira-uvecano-transparento.png" alt="Vebira"
+         style="height:32px;width:auto;filter:brightness(0) invert(1);opacity:0.88;">
+  </a>
+  <a href="index.html" class="back-link">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Nazad na sajt
+  </a>
+</nav>
+
+
+<!-- ── HERO ── -->
+<header class="legal-hero" role="banner">
+  <div style="max-width:760px;position:relative;">
+    <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:20px;">
+      Pravni dokumenti
+    </p>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,66px);font-weight:300;line-height:0.9;letter-spacing:-0.03em;color:#fff;margin-bottom:30px;">
+      Politika<br><em style="font-style:italic;">kolačića</em>
+    </h1>
+    <p style="font-family:'Jost',sans-serif;font-size:12.5px;font-weight:300;color:rgba(255,255,255,0.28);letter-spacing:0.07em;">
+      Datum poslednje izmene: 04.06.2026.
+    </p>
+  </div>
+</header>
+
+
+<!-- ── MAIN CONTENT ── -->
+<main>
+<div class="legal-wrap">
+
+  <!-- Intro -->
+  <p class="legal-intro">
+    Ova politika objašnjava šta su kolačići, kako ih koristimo na sajtu Salon Vebira i kako možete da upravljate svojim preferencijama. Koristimo kolačiće kako bismo vam pružili bolje korisničko iskustvo i kako bismo razumeli kako posetilaci koriste naš sajt.
+  </p>
+
+
+  <!-- 01 -->
+  <div class="legal-section">
+    <span class="section-num">01</span>
+    <h2 class="section-h">Šta su kolačići?</h2>
+    <p class="lp">
+      Kolačići su male tekstualne datoteke koje se čuvaju na vašem uređaju (računaru, telefonu ili tabletu) kada posetite veb sajt. Oni omogućavaju sajtu da „zapamti" određene informacije o vama i poboljša vaše iskustvo pri narednim posetama.
+    </p>
+    <p class="lp">
+      Kolačići ne mogu da pokreću programe niti da prenose viruse na vaš uređaj. Svaki sajt može da čita samo kolačiće koje je sam postavio — ne i kolačiće drugih sajtova.
+    </p>
+  </div>
+
+
+  <!-- 02 -->
+  <div class="legal-section">
+    <span class="section-num">02</span>
+    <h2 class="section-h">Koje vrste kolačića koristimo?</h2>
+    <p class="lp">Na našem sajtu koristimo tri vrste kolačića:</p>
+
+    <!-- Neophodni -->
+    <div class="cookie-type">
+      <div class="cookie-type-label">
+        <span class="cookie-badge badge-required">Neophodni</span>
+        <span class="cookie-type-name">Neophodni kolačići</span>
+      </div>
+      <p class="cookie-type-desc">
+        Ovi kolačići su neophodni za ispravno funkcionisanje sajta i ne mogu se isključiti. Čuvaju vaše sesijske podatke i osnovna podešavanja. Ne prikupljaju lične podatke i ne koriste se u marketinške svrhe.
+      </p>
+    </div>
+
+    <!-- Analitički -->
+    <div class="cookie-type">
+      <div class="cookie-type-label">
+        <span class="cookie-badge badge-analytics">Analitički</span>
+        <span class="cookie-type-name">Analitički kolačići</span>
+      </div>
+      <p class="cookie-type-desc">
+        Pomažu nam da razumemo kako posetioci koriste sajt — koje stranice najčešće posećuju, koliko vremena provode, odakle dolaze. Koristimo Google Analytics za prikupljanje ovih podataka u anonimizovanom obliku. Podaci ne mogu da vas identifikuju lično.
+      </p>
+    </div>
+
+    <!-- Marketinški -->
+    <div class="cookie-type">
+      <div class="cookie-type-label">
+        <span class="cookie-badge badge-marketing">Marketinški</span>
+        <span class="cookie-type-name">Marketinški kolačići</span>
+      </div>
+      <p class="cookie-type-desc">
+        Koriste se za prikazivanje oglasa koji su relevantni za vas na osnovu vaših prethodnih poseta sajtu (retargeting). Ovi kolačići prate vaše ponašanje na internetu kako bi oglasi bili što prilagođeniji vašim interesovanjima. Postavljaju ih naši reklamni partneri (Meta, Google).
+      </p>
+    </div>
+  </div>
+
+
+  <!-- 03 -->
+  <div class="legal-section">
+    <span class="section-num">03</span>
+    <h2 class="section-h">Kolačići trećih strana</h2>
+    <p class="lp">Naš sajt koristi kolačiće sledećih trećih strana:</p>
+
+    <div class="tp-item">
+      <div class="tp-name">
+        <span class="tp-name-text">Meta Pixel<br><span style="font-weight:300;font-size:12px;color:var(--bark);">Facebook · Instagram</span></span>
+      </div>
+      <p class="tp-desc">Za merenje konverzija i prikazivanje retargeting oglasa na Facebook i Instagram platformi. Meta može koristiti ove podatke u skladu sa sopstvenom politikom privatnosti.</p>
+    </div>
+
+    <div class="tp-item">
+      <div class="tp-name">
+        <span class="tp-name-text">Google Analytics</span>
+      </div>
+      <p class="tp-desc">Za analizu saobraćaja i ponašanja korisnika na sajtu. Podaci se prikupljaju u anonimizovanom obliku i ne mogu vas identifikovati lično.</p>
+    </div>
+
+    <div class="tp-item">
+      <div class="tp-name">
+        <span class="tp-name-text">Google Ads</span>
+      </div>
+      <p class="tp-desc">Za merenje konverzija iz Google oglasnih kampanja i remarketing — prikazivanje oglasa Salon Vebira korisnicima koji su prethodno posetili naš sajt.</p>
+    </div>
+
+    <div class="note-box">
+      Svaka od navedenih platformi ima sopstvenu politiku privatnosti koja uređuje prikupljanje i korišćenje podataka putem njihovih kolačića. Preporučujemo da se upoznate sa tim politikama direktno na sajtovima Meta i Google.
+    </div>
+  </div>
+
+
+  <!-- 04 -->
+  <div class="legal-section">
+    <span class="section-num">04</span>
+    <h2 class="section-h">Upravljanje kolačićima</h2>
+    <p class="lp">Možete da kontrolišete ili izbrišete kolačiće na sledeće načine:</p>
+    <ul class="ll">
+      <li>
+        <strong style="font-weight:500;color:var(--ink);">Podešavanja pretraživača</strong> — u opcijama vašeg pretraživača (Chrome, Firefox, Safari, Edge) možete blokirati ili izbrisati kolačiće za sve sajtove ili samo za određene
+      </li>
+      <li>
+        <strong style="font-weight:500;color:var(--ink);">Baner za saglasnost</strong> — putem banera koji se pojavljuje pri prvoj poseti sajtu, možete odabrati koje kategorije kolačića prihvatate
+      </li>
+      <li>
+        <strong style="font-weight:500;color:var(--ink);">Google Analytics opt-out</strong> — možete instalirati Google Analytics Opt-out Browser Add-on koji sprečava slanje podataka ka Google Analytics
+      </li>
+    </ul>
+
+    <div class="note-box">
+      <strong style="font-weight:500;color:var(--ink);">Napomena:</strong> Ukoliko onemogućite ili izbrišete kolačiće, određene funkcionalnosti sajta možda neće raditi ispravno. Neophodni kolačići se ne mogu isključiti jer su ključni za rad sajta.
+    </div>
+  </div>
+
+
+  <!-- 05 -->
+  <div class="legal-section">
+    <span class="section-num">05</span>
+    <h2 class="section-h">Saglasnost za korišćenje kolačića</h2>
+    <p class="lp">
+      Prilikom prve posete našem sajtu prikazuje se baner putem kojeg možete dati ili odbiti saglasnost za korišćenje neobaveznih kolačića (analitičkih i marketinških). Neophodni kolačići se postavljaju bez posebne saglasnosti jer su uslov za funkcionisanje sajta.
+    </p>
+    <p class="lp">
+      Svoju saglasnost možete promeniti ili povući u svakom trenutku. Za više informacija o tome kako koristimo vaše lične podatke, pogledajte našu <a href="privacy-policy.html" class="il">Politiku privatnosti</a>.
+    </p>
+    <p class="lp">
+      Za sva pitanja u vezi sa kolačićima i privatnošću, kontaktirajte nas na: <a href="mailto:salonvebira@gmail.com" class="il">salonvebira@gmail.com</a>
+    </p>
+  </div>
+
+</div>
+</main>
+
+
+<!-- ── FOOTER ── -->
+<footer class="legal-footer" role="contentinfo">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%, rgba(194,67,113,0.09) 0%, transparent 65%);pointer-events:none;"></div>
+
+  <div class="footer-pad" style="max-width:1200px;margin:0 auto;padding:64px 56px 38px;position:relative;">
+
+    <!-- Logo -->
+    <div style="display:flex;justify-content:center;margin-bottom:16px;">
+      <img src="resources/Full-logo-uvecano-transparento.png" alt="Salon Vebira"
+           style="height:130px;width:auto;opacity:0.88;">
+    </div>
+    <p style="text-align:center;font-size:10.5px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.16);margin-bottom:36px;font-weight:300;">
+      Kozmetičko-frizerski salon · Beograd
+    </p>
+
+    <!-- Separator dots -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:32px;">
+      <div style="flex:1;height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.05));"></div>
+      <div style="display:flex;gap:7px;align-items:center;">
+        <div style="width:4px;height:4px;border-radius:50%;background:rgba(194,67,113,0.32);"></div>
+        <div style="width:7px;height:7px;border-radius:50%;background:rgba(194,67,113,0.52);"></div>
+        <div style="width:4px;height:4px;border-radius:50%;background:rgba(194,67,113,0.32);"></div>
+      </div>
+      <div style="flex:1;height:1px;background:linear-gradient(270deg, transparent, rgba(255,255,255,0.05));"></div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.13);">© 2025 Salon Vebira. Sva prava zadržana.</p>
+      <div style="display:flex;gap:28px;flex-wrap:wrap;align-items:center;">
+        <a href="privacy-policy.html" class="fp-link">Politika privatnosti</a>
+        <a href="cookie-policy.html" class="fp-link" style="color:rgba(255,255,255,0.5);">Politika kolačića</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

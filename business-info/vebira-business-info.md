@@ -13,7 +13,7 @@
 
 ## O salonu
 
-Salon Vebira je kozmetičko-frizerski salon u Beogradu koji se izdvaja posebnim pristupom nezi kože lica i tela. Ono što Vebiru čini drugačijom od ostalih salona jeste fokus na **prirodna i biljna rešenja** u tretmanima lica, kao i upotreba provjerenih metoda koje kombinuju estetiku i zdravlje.
+Salon Vebira je kozmetičko-frizerski salon u Beogradu koji postoji više od 20 godina. Izdvaja se posebnim pristupom nezi kože lica i tela. Ono što Vebiru čini drugačijom od ostalih salona jeste fokus na **prirodna i biljna rešenja** u tretmanima lica, kao i upotreba proverenih metoda koje kombinuju estetiku i zdravlje.
 
 ---
 
@@ -55,8 +55,8 @@ Parafinsko pakovanje je toplotna terapija koja dubinski hidrira i revitalizuje k
 | Tretman lica | 3.000 |
 | Polutretman lica | 200 |
 | Parafinsko pakovanje lica | 1.500 |
-| Parafinsko pakovanje sa masažom | 1.300 |
-| Masaža lica | 700 |
+| Parafinsko pakovanje sa masažom | 2.000 |
+| Masaža lica | 1.300 |
 
 ### Depilacija
 
