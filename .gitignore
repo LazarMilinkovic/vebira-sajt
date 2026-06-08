@@ -1,0 +1,5 @@
+# Screenshot development scripts
+screenshot*.mjs
+
+# Temporary screenshots
+temporary screenshots/

@@ -1,22 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Salon Vebira — kozmetičko-frizerski salon u Beogradu. Depilacija hladnim voskom, medicinski pedikir, tretmani lica sa biljnim ekstraktima. Ratka Mitrovića 162/20.">
+  <meta name="description" content="Salon Vebira, kozmetičko-frizerski salon u Beogradu. Depilacija hladnim voskom, medicinski pedikir, tretmani lica sa biljnim ekstraktima. Ratka Mitrovića 162/20.">
   <title>Salon Vebira | Kozmetički salon Beograd</title>
+  <link rel="icon" type="image/png" href="brand-assets/Logo/girl-from-logo.png">
+  <link rel="apple-touch-icon" href="brand-assets/Logo/girl-from-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init({ publicKey: 'T4T1k94jXIaHu-w92' });
+    })();
+  </script>
 
   <style>
     :root {
       --linen:      #F0EAE1;
       --sand:       #E6D9CC;
-      --parchment:  #FAF7F3;
-      --warm-white: #FDFBF8;
+      --parchment:  #F8EDF3;
+      --warm-white: #FBF2F7;
       --ink:        #1C1510;
       --taupe:      #6B5A4E;
       --rose:       #C24371;
@@ -103,7 +111,7 @@
     .reveal-fade.in { opacity: 1; }
 
     /* Hero title: lines clip up from below (newspaper effect) */
-    .clip-wrap { display: block; overflow: hidden; }
+    .clip-wrap { display: block; overflow: hidden; padding-bottom: 0.18em; margin-bottom: -0.18em; }
     .clip-inner {
       display: block;
       transform: translateY(108%);
@@ -130,18 +138,28 @@
     }
     .price-row.in { opacity: 1; transform: translateX(0); }
 
+    /* Staggered service list rows — subtle vertical slide */
+    .reveal-row {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.58s cubic-bezier(.16,1,.3,1),
+                  transform 0.58s cubic-bezier(.16,1,.3,1);
+      transition-delay: var(--d, 0s);
+    }
+    .reveal-row.in { opacity: 1; transform: translateY(0); }
+
 
     /* ════════════════════════════
        NAVIGATION
     ════════════════════════════ */
     #nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      padding: 16px 56px;
+      padding: 32px 56px;
       display: flex; align-items: center; justify-content: space-between;
       transition: background 0.5s ease, padding 0.4s ease;
     }
     #nav.scrolled {
-      padding: 10px 56px;
+      padding: 22px 56px;
       background: rgba(250,247,243,0.68);
       backdrop-filter: blur(18px) saturate(1.4);
       -webkit-backdrop-filter: blur(18px) saturate(1.4);
@@ -312,7 +330,7 @@
     #mob-menu {
       position: fixed; inset: 0; z-index: 199;
       background: var(--parchment);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      display: none; flex-direction: column; align-items: center; justify-content: center;
       gap: 36px;
       transform: translateX(100%);
       transition: transform 0.45s cubic-bezier(.16,1,.3,1);
@@ -366,6 +384,13 @@
     .img-hover:hover img { transform: scale(1.05); }
 
 
+    /* Social icon hover */
+    .social-icon-link:hover {
+      border-color: rgba(194,67,113,0.65) !important;
+      background: rgba(194,67,113,0.18) !important;
+      color: rgba(255,255,255,0.82) !important;
+    }
+
     /* ════════════════════════════
        RESPONSIVE
     ════════════════════════════ */
@@ -381,11 +406,20 @@
       #nav        { padding: 12px 20px; }
       #nav.scrolled { padding: 8px 20px; }
       .section-pad { padding: 72px 24px !important; }
-      .hero-pad   { padding: 0 24px 68px !important; }
+      .hero-pad   { padding: 0 24px !important; }
       .two-col    { grid-template-columns: 1fr !important; }
       .three-col  { grid-template-columns: 1fr !important; }
-      .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-      .hero-title { font-size: 58px !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .footer-logo { height: 120px !important; }
+      footer { isolation: isolate !important; }
+      footer .footer-inner { padding: 48px 24px 32px !important; }
+      footer .footer-glow { display: none !important; }
+      footer .footer-accent-line { display: none !important; }
+      footer .footer-tagline { margin-bottom: 28px !important; }
+      footer .footer-social { margin-bottom: 28px !important; }
+      footer .footer-bottom { flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center; gap: 10px !important; }
+      footer .footer-bottom .footer-bottom-links { justify-content: center !important; }
+      .hero-title { font-size: 54px !important; }
       .svc-hero   { flex-direction: column !important; }
       .svc-hero-img { min-height: 280px !important; flex: 0 0 280px !important; }
       .cta-bar    { flex-direction: column !important; align-items: flex-start !important; }
@@ -397,6 +431,117 @@
     @media (max-width: 480px) {
       .hero-title { font-size: 44px !important; }
     }
+
+    /* ════════════════════════════
+       SERVICES — ROW LIST
+    ════════════════════════════ */
+    .svc-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 0 36px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.32s cubic-bezier(.16,1,.3,1),
+                  transform 0.32s cubic-bezier(.16,1,.3,1);
+      transform: translateX(0);
+      will-change: transform;
+    }
+    .svc-row:first-child { border-top: 1px solid var(--border); }
+    .svc-row:hover {
+      background: rgba(251,242,247,0.7);
+      transform: translateX(10px);
+    }
+    .svc-row-meta {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bark);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .svc-row-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      transition: color 0.22s ease;
+    }
+    .svc-row:hover .svc-row-title { color: var(--rose-dk); }
+    .svc-row-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.78;
+      color: var(--taupe);
+    }
+    .svc-row-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--rose);
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 5px;
+      min-width: 90px;
+    }
+    .svc-row-link {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(28,21,16,0.28);
+      padding-bottom: 2px;
+      white-space: nowrap;
+      padding-top: 7px;
+      transition: color 0.22s ease, border-color 0.22s ease;
+    }
+    .svc-row-link:hover { color: var(--rose); border-color: var(--rose); }
+
+    /* Featured service blocks */
+    .svc-featured-block {
+      position: relative;
+      background: var(--warm-white);
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .svc-featured-accent {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--rose);
+    }
+    .svc-featured-badge {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--rose);
+      color: #fff;
+      padding: 4px 10px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    @media (max-width: 900px) {
+      .svc-featured-grid { grid-template-columns: 1fr !important; }
+      .svc-featured-block { padding: 40px 32px !important; }
+      .svc-row { grid-template-columns: 1fr auto !important; }
+      .svc-row-link { display: none; }
+      .svc-row { gap: 0 20px !important; }
+    }
+    @media (max-width: 600px) {
+      .svc-row { grid-template-columns: 1fr !important; }
+      .svc-row-price { display: none; }
+      .svc-rows-wrap { padding: 8px 20px !important; }
+    }
+    @media (max-width: 767px) {
+      .svc-rows-wrap { padding: 8px 24px !important; }
+    }
   </style>
 </head>
 <body>
@@ -407,8 +552,8 @@
 ════════════════════════════════════════ -->
 <nav id="nav">
   <a href="#hero" aria-label="Salon Vebira">
-    <img src="brand-assets/Logo/vebira-transparent.png" alt="Vebira"
-         style="height:72px;width:auto;filter:brightness(0) invert(1);transition:filter 0.4s ease;" id="nav-logo">
+    <img src="resources/Vebira-uvecano-transparento.png" alt="Vebira"
+         style="height:38px;width:auto;filter:brightness(0) invert(1);transition:filter 0.4s ease;" id="nav-logo">
   </a>
 
   <div style="display:flex;align-items:center;gap:16px;">
@@ -438,10 +583,6 @@
   <a href="#usluge"   class="nav-link" onclick="closeMenu()">Usluge</a>
   <a href="#cenovnik" class="nav-link" onclick="closeMenu()">Cenovnik</a>
   <a href="#kontakt"  class="nav-link" onclick="closeMenu()">Kontakt</a>
-  <a href="tel:0641654676" class="btn btn-rose" onclick="closeMenu()" style="display:inline-flex;align-items:center;gap:9px;">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-    Pozovite nas
-  </a>
 </div>
 
 
@@ -450,25 +591,29 @@
 ════════════════════════════════════════ -->
 <section id="hero" style="position:relative;height:100dvh;min-height:640px;overflow:hidden;">
 
-  <img src="https://placehold.co/1600x1000/C9B8A8/F0EAE1?text=Salon+Vebira" alt="Salon Vebira"
-       id="hero-img"
-       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;will-change:transform;">
+  <!-- Video background — Seedance AI (4 MB, loops silently) -->
+  <video id="hero-video"
+         autoplay muted loop playsinline
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform;">
+    <source src="resources/Animate_this_background_I_need_Seedance_20_25198.mp4" type="video/mp4">
+  </video>
 
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.22) 0%,rgba(28,21,16,0.06) 38%,rgba(28,21,16,0.65) 100%);"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(140deg,rgba(194,67,113,0.07) 0%,transparent 55%);mix-blend-mode:overlay;pointer-events:none;"></div>
+  <!-- Dark brand overlay — espresso base + warm rose accent -->
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(122,98,83,0.87) 0%,rgba(122,98,83,0.68) 40%,rgba(122,98,83,0.95) 100%);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(145deg,rgba(122,98,83,0.20) 0%,transparent 58%);mix-blend-mode:overlay;pointer-events:none;"></div>
 
-  <!-- Content -->
-  <div class="hero-pad" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 56px 88px;">
-    <div style="max-width:1200px;width:100%;">
+  <!-- Content — vertically centered, pulled right from left edge -->
+  <div class="hero-pad" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 56px 0 clamp(61px,calc(11vw + 5px),185px);">
+    <div style="max-width:740px;">
 
-      <p class="overline reveal-fade" style="color:rgba(255,255,255,0.55);margin-bottom:26px;--d:0.15s;">
+      <p class="overline reveal-fade" style="color:rgba(255,255,255,0.52);margin-bottom:28px;--d:0.15s;">
         Kozmetičko-frizerski salon · Beograd
       </p>
 
       <h1 class="hero-title"
-          style="font-family:'Cormorant Garamond',serif;font-size:clamp(66px,9.5vw,152px);font-weight:300;line-height:0.87;letter-spacing:-0.03em;color:#fff;margin-bottom:44px;">
-        <span class="clip-wrap"><span class="clip-inner" style="--d:0.22s">Salon</span></span>
-        <span class="clip-wrap"><em class="clip-inner" style="--d:0.46s;font-style:italic;">Vebira</em></span>
+          style="font-family:'Cormorant Garamond',serif;font-size:clamp(68px,9vw,148px);font-weight:300;line-height:0.88;letter-spacing:-0.03em;color:#fff;margin-bottom:46px;">
+        <span class="clip-wrap"><span class="clip-inner" style="--d:0.22s;color:#C24371;">Priroda</span></span>
+        <span class="clip-wrap"><em class="clip-inner" style="--d:0.42s;font-style:italic;">zna najbolje.</em></span>
       </h1>
 
       <div class="reveal-fade" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;--d:0.82s;">
@@ -494,7 +639,7 @@
 <!-- ════════════════════════════════════════
      PAINPOINT
 ════════════════════════════════════════ -->
-<section id="problem" class="section-pad" style="padding:120px 56px;background:var(--parchment);position:relative;overflow:hidden;">
+<section id="problem" class="section-pad" style="padding:120px 56px;background:#FAF7F2;position:relative;overflow:hidden;">
 
   <!-- Large decorative bg character -->
   <div aria-hidden="true"
@@ -519,7 +664,7 @@
         <div class="line-grow" style="width:36px;height:2px;background:var(--rose);margin-bottom:28px;--d:0.28s;"></div>
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Higijenska<br>nesigurnost</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--taupe);">
-          Deljena posuda sa toplim voskom znači deljenje bakterija i gljivica između klijenata. Rizik koji ne bi trebalo da postoji.
+          U većini salona isti topli vosak koristi više klijenata bez menjanja. Bakterije i gljivice prelaze s jedne kože na drugu. To se ne dešava tamo gde se patrone bacaju posle svakog klijenta.
         </p>
       </div>
 
@@ -527,7 +672,7 @@
         <div class="line-grow" style="width:36px;height:2px;background:var(--rose);margin-bottom:28px;--d:0.38s;"></div>
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Koža koja<br>plati cenu</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--taupe);">
-          Suva, umorna i bez sjaja — direktna posledica tretmana koji ne hrane i ne štite kožu. Vaše lice zaslužuje pravi botanički tretman.
+          Depilacija i dubinsko čišćenje lica mogu ostaviti kožu suvu i nadraženu. Biljni ekstrakti u patronama nisu marketinški detalj, nego zaštita kože tokom samog tretmana.
         </p>
       </div>
 
@@ -535,7 +680,7 @@
         <div class="line-grow" style="width:36px;height:2px;background:var(--rose);margin-bottom:28px;--d:0.48s;"></div>
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Površinski<br>pristup</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--taupe);">
-          Urasli nokti, žuljevi, hiperkeratoze — problemi koji zahtevaju stručan, medicinski pristup, ne samo estetski.
+          Urasli nokti, žuljevi i zadebljala koža su medicinski problemi. Estetski pedikir ih uklanja privremeno. Medicinski pedikir ide do uzroka.
         </p>
       </div>
 
@@ -546,7 +691,7 @@
       <div style="position:relative;">
         <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(194,67,113,0.14) 0%,transparent 70%);pointer-events:none;"></div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.8vw,34px);font-weight:300;color:#fff;line-height:1.25;position:relative;">
-          U Vebiri, svaki tretman je<br><em style="color:var(--rose);font-style:italic;">priča o pravoj brizi.</em>
+          U Vebiri tretman počinje<br><em style="color:var(--rose);font-style:italic;">od uzroka, ne od površine.</em>
         </p>
       </div>
       <a href="#o-nama" class="btn btn-outline-light" style="flex-shrink:0;">Upoznajte nas</a>
@@ -559,13 +704,14 @@
 <!-- ════════════════════════════════════════
      O NAMA
 ════════════════════════════════════════ -->
-<section id="o-nama" class="section-pad" style="padding:120px 56px;background:var(--linen);">
+<section id="o-nama" class="section-pad" style="padding:120px 56px;background:#FAF7F2;">
   <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;" class="two-col">
 
     <!-- Image column -->
     <div class="reveal-left" style="position:relative;">
       <div class="img-hover" style="aspect-ratio:4/5;">
-        <img src="https://placehold.co/680x850/DDD1C3/6B5A4E?text=Salon+Vebira" alt="Salon Vebira enterijer"
+        <img src="https://images.unsplash.com/photo-1626383137804-ff908d2753a2?w=680&h=850&fit=crop&auto=format&q=80"
+             alt="Salon Vebira enterijer"
              style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <!-- Floating stat -->
@@ -586,15 +732,11 @@
       <p class="reveal" style="font-size:17px;font-weight:300;line-height:1.85;color:var(--taupe);margin-bottom:16px;--d:0.12s;">
         Salon Vebira je kozmetičko-frizerski salon u Beogradu koji se izdvaja posebnim pristupom nezi kože lica i tela. Kombinujemo estetiku i zdravlje kroz <strong style="color:var(--ink);font-weight:500;">prirodna i biljna rešenja</strong>.
       </p>
-      <p class="reveal" style="font-size:17px;font-weight:300;line-height:1.85;color:var(--taupe);margin-bottom:40px;--d:0.2s;">
-        Sa više od 20 godina iskustva, koristimo isključivo hladni vosak iz patrona za jednokratnu upotrebu i kliničke protokole koji stavljaju vaše zdravlje na prvo mesto.
-      </p>
-
       <!-- Differentiators list -->
       <div class="reveal" style="border-top:1px solid var(--border);margin-bottom:40px;--d:0.26s;">
         <div style="display:flex;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid var(--border);">
           <div style="width:5px;height:5px;border-radius:50%;background:var(--rose);flex-shrink:0;"></div>
-          <span style="font-size:15px;color:var(--ink);">Hladni vosak — patrone za jednokratnu upotrebu</span>
+          <span style="font-size:15px;color:var(--ink);">Hladni vosak, patrone za jednokratnu upotrebu</span>
         </div>
         <div style="display:flex;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid var(--border);">
           <div style="width:5px;height:5px;border-radius:50%;background:var(--rose);flex-shrink:0;"></div>
@@ -616,7 +758,7 @@
 <!-- ════════════════════════════════════════
      USLUGE
 ════════════════════════════════════════ -->
-<section id="usluge" class="section-pad" style="padding:120px 56px;background:var(--parchment);">
+<section id="usluge" class="section-pad" style="padding:120px 56px;background:#FAF7F2;">
   <div style="max-width:1200px;margin:0 auto;">
 
     <!-- Section header -->
@@ -630,102 +772,133 @@
       <a href="#cenovnik" class="btn btn-outline reveal" style="flex-shrink:0;align-self:flex-end;--d:0.16s;">Pogledaj cenovnik</a>
     </div>
 
-    <!-- ── HERO SERVICE: Tretmani lica ── -->
-    <div class="svc-hero reveal-scale" style="display:flex;overflow:hidden;border:1px solid var(--border);margin-bottom:3px;min-height:520px;">
+    <!-- ── FEATURED: Tretmani lica + Parafinsko pakovanje ── -->
+    <div class="svc-featured-grid reveal-scale" style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:3px;--d:0.04s;">
 
-      <!-- Image -->
-      <div class="svc-hero-img img-hover" style="flex:0 0 46%;position:relative;min-height:520px;">
-        <img src="https://placehold.co/720x600/DDD1C3/4A3C34?text=Tretmani+lica" alt="Tretmani lica"
-             style="width:100%;height:100%;object-fit:cover;display:block;">
-        <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 0%,rgba(250,247,243,0.45) 100%);pointer-events:none;"></div>
-        <!-- Badge -->
-        <div style="position:absolute;top:28px;left:28px;background:var(--rose);padding:8px 18px;">
-          <p style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#fff;">Hero tretman</p>
+      <!-- Tretmani lica -->
+      <div class="svc-featured-block" style="background:var(--espresso);">
+        <div class="svc-featured-accent" style="background:var(--rose);"></div>
+        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:36px;">
+          <span class="svc-featured-badge" style="background:var(--rose);color:#fff;">Istaknuto</span>
         </div>
-      </div>
-
-      <!-- Content -->
-      <div style="flex:1;padding:52px 56px;background:var(--warm-white);display:flex;flex-direction:column;justify-content:center;">
-        <p class="overline" style="margin-bottom:18px;color:var(--rose);">Naš potpis</p>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,58px);font-weight:300;line-height:0.93;letter-spacing:-0.02em;color:var(--ink);margin-bottom:22px;">
-          Tretmani<br><em style="font-style:italic;">lica</em>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.2vw,54px);font-weight:300;line-height:0.95;letter-spacing:-0.02em;color:#fff;margin-bottom:18px;">
+          Tretmani<br>lica
         </h3>
-        <div style="width:32px;height:1px;background:var(--rose);margin-bottom:22px;"></div>
-        <p style="font-size:16px;font-weight:300;line-height:1.85;color:var(--taupe);margin-bottom:28px;max-width:400px;">
-          Biljna rešenja za kožu koja zaslužuje pažnju. Parafinsko pakovanje sa vitaminom E i eteričnim uljima otvara pore i dubinski hidrira — vidljivi rezultati odmah posle prvog tretmana. Svaki tretman je prilagođen vašoj koži.
+        <div style="width:36px;height:1px;background:var(--rose);margin-bottom:22px;"></div>
+        <p style="font-size:16px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.72);margin-bottom:36px;flex:1;">
+          Biljna rešenja za kožu koja zaslužuje pažnju. Svaki tretman prilagođen tipu vaše kože: dubinsko čišćenje, hranjenje i hidratacija uz prirodne botaničke ekstrakte.
         </p>
-
-        <!-- Featured services -->
-        <div style="display:flex;flex-direction:column;border-top:1px solid var(--border);margin-bottom:36px;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);">
+        <div style="border-top:1px solid rgba(255,255,255,0.18);margin-bottom:32px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.12);">
             <div>
-              <p style="font-size:15px;font-weight:400;color:var(--ink);">Tretman lica</p>
-              <p style="font-size:13px;font-weight:300;color:var(--bark);margin-top:3px;">Dubinsko čišćenje · hidratacija · biljni ekstrakti</p>
+              <p style="font-size:15px;font-weight:400;color:rgba(255,255,255,0.92);">Tretman lica</p>
+              <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:2px;">Dubinsko čišćenje · hidratacija · biljni ekstrakti</p>
             </div>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);">3.000 rsd</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);white-space:nowrap;margin-left:12px;">3.000 rsd</span>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.12);">
             <div>
-              <p style="font-size:15px;font-weight:400;color:var(--ink);">Parafinsko pakovanje</p>
-              <p style="font-size:13px;font-weight:300;color:var(--bark);margin-top:3px;">Vitamin E · eterična ulja · toplotna terapija</p>
+              <p style="font-size:15px;font-weight:400;color:rgba(255,255,255,0.92);">Polutretman lica</p>
+              <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:2px;">Osvežavajući mini tretman</p>
             </div>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);">1.500 rsd</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);white-space:nowrap;margin-left:12px;">200 rsd</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;">
             <div>
-              <p style="font-size:15px;font-weight:400;color:var(--ink);">Masaža lica</p>
-              <p style="font-size:13px;font-weight:300;color:var(--bark);margin-top:3px;">Opuštanje · cirkulacija · sjaj</p>
+              <p style="font-size:15px;font-weight:400;color:rgba(255,255,255,0.92);">Masaža lica</p>
+              <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:2px;">Opuštanje · cirkulacija · sjaj</p>
             </div>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);">1.300 rsd</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);white-space:nowrap;margin-left:12px;">1.300 rsd</span>
           </div>
         </div>
-
-        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
-          <a href="#kontakt" class="btn btn-rose" style="animation:pulse-ring 2.8s ease infinite;">Zakaži tretman</a>
-          <a href="#cenovnik" class="btn btn-outline">Svi tretmani</a>
-        </div>
+        <a href="#kontakt" class="btn" style="align-self:flex-start;background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.35);font-size:11px;letter-spacing:0.18em;padding:14px 28px;text-decoration:none;text-transform:uppercase;font-weight:500;transition:background 0.22s ease,border-color 0.22s ease;animation:pulse-ring 2.8s ease infinite;">Zakaži tretman</a>
       </div>
+
+      <!-- Parafinsko pakovanje -->
+      <div class="svc-featured-block" style="background:var(--espresso);">
+        <div class="svc-featured-accent" style="background:var(--rose);"></div>
+        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:36px;">
+          <span class="svc-featured-badge" style="background:var(--rose);color:#fff;">Premium</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.2vw,54px);font-weight:300;line-height:0.95;letter-spacing:-0.02em;color:#fff;margin-bottom:18px;">
+          Parafinsko<br>pakovanje
+        </h3>
+        <div style="width:36px;height:1px;background:var(--rose);margin-bottom:22px;"></div>
+        <p style="font-size:16px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.72);margin-bottom:36px;flex:1;">
+          Toplotna terapija obogaćena vitaminom E i eteričnim uljima. Otvara pore, pojačava cirkulaciju i dubinski hidrira. Koža odmah postaje mekša i vidno pomlađena.
+        </p>
+        <div style="border-top:1px solid rgba(255,255,255,0.18);margin-bottom:32px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.12);">
+            <div>
+              <p style="font-size:15px;font-weight:400;color:rgba(255,255,255,0.92);">Parafinsko pakovanje lica</p>
+              <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:2px;">Vitamin E · eterična ulja · toplotna terapija</p>
+            </div>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);white-space:nowrap;margin-left:12px;">1.500 rsd</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;">
+            <div>
+              <p style="font-size:15px;font-weight:400;color:rgba(255,255,255,0.92);">Pakovanje sa masažom</p>
+              <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);margin-top:2px;">Kompletna relaksacija i duboka nega</p>
+            </div>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--rose);white-space:nowrap;margin-left:12px;">2.000 rsd</span>
+          </div>
+        </div>
+        <a href="#kontakt" class="btn" style="align-self:flex-start;background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.35);font-size:11px;letter-spacing:0.18em;padding:14px 28px;text-decoration:none;text-transform:uppercase;font-weight:500;transition:background 0.22s ease,border-color 0.22s ease;">Zakaži tretman</a>
+      </div>
+
     </div>
 
-    <!-- ── Supporting cards ── -->
-    <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+    <!-- ── Sekundarne usluge — čisti numerisani redovi ── -->
+    <div class="svc-rows-wrap" style="background:var(--warm-white);padding:8px 40px 8px;">
 
-      <!-- Depilacija -->
-      <div class="reveal-scale" style="background:var(--warm-white);border:1px solid var(--border);overflow:hidden;--d:0.06s;">
-        <div class="img-hover" style="aspect-ratio:16/9;overflow:hidden;position:relative;">
-          <img src="https://placehold.co/720x405/C9B8A8/F0EAE1?text=Depilacija" alt="Depilacija hladnim voskom"
-               style="width:100%;height:100%;object-fit:cover;display:block;">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,21,16,0.58) 0%,transparent 55%);pointer-events:none;"></div>
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 32px;">
-            <p style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;font-family:'Jost',sans-serif;">Isključivo hladni vosak</p>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#fff;line-height:1;">Depilacija</h3>
-          </div>
+      <div class="svc-row reveal-row" style="--d:0s;">
+        <div>
+          <p class="svc-row-meta">Isključivo hladni vosak</p>
+          <h4 class="svc-row-title">Depilacija</h4>
+          <p class="svc-row-desc">Patrone za jednokratnu upotrebu, biljni ekstrakti: azulen, argan, aloja. Bezbedno čak i za proširene vene.</p>
         </div>
-        <div style="padding:32px 36px;">
-          <p style="font-size:16px;font-weight:300;line-height:1.85;color:var(--taupe);margin-bottom:24px;">
-            Patrone za jednokratnu upotrebu eliminišu rizik od bakterijskih i gljivičnih infekcija. Biljni ekstrakti — azulen, argan, aloja, lavanda — umiruju i hrane kožu tokom tretmana. Blagi čak i za najosetljiviju kožu i proširene vene.
-          </p>
-          <a href="#cenovnik" class="btn btn-outline" style="font-size:9px;padding:12px 28px;">Vidi cene</a>
-        </div>
+        <div class="svc-row-price">od 700 rsd</div>
+        <a href="#cenovnik" class="svc-row-link">Vidi cene →</a>
       </div>
 
-      <!-- Pedikir i nega -->
-      <div class="reveal-scale" style="background:var(--warm-white);border:1px solid var(--border);overflow:hidden;--d:0.16s;">
-        <div class="img-hover" style="aspect-ratio:16/9;overflow:hidden;position:relative;">
-          <img src="https://placehold.co/720x405/E6D9CC/6B5A4E?text=Pedikir" alt="Medicinski pedikir"
-               style="width:100%;height:100%;object-fit:cover;display:block;">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,21,16,0.58) 0%,transparent 55%);pointer-events:none;"></div>
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 32px;">
-            <p style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:7px;font-family:'Jost',sans-serif;">Zdravlje stopala</p>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:#fff;line-height:1;">Pedikir &amp; nega</h3>
-          </div>
+      <div class="svc-row reveal-row" style="--d:0.09s;">
+        <div>
+          <p class="svc-row-meta">Estetski · Medicinski</p>
+          <h4 class="svc-row-title">Pedikiri</h4>
+          <p class="svc-row-desc">Medicinski pedikir za urasle nokte, hiperkeratoze i žuljeve. Sterilni instrumentarijum i klinički protokol.</p>
         </div>
-        <div style="padding:32px 36px;">
-          <p style="font-size:16px;font-weight:300;line-height:1.85;color:var(--taupe);margin-bottom:24px;">
-            Medicinski pedikir za urasle nokte, hiperkeratoze, žuljeve i gljivične infekcije. Sterilni instrumentarijum i klinički protokol — ne samo izgled, već zdravlje stopala. U ponudi i anticelulit masaža i gel lak.
-          </p>
-          <a href="#cenovnik" class="btn btn-outline" style="font-size:9px;padding:12px 28px;">Vidi cene</a>
+        <div class="svc-row-price">od 1.800 rsd</div>
+        <a href="#cenovnik" class="svc-row-link">Vidi cene →</a>
+      </div>
+
+      <div class="svc-row reveal-row" style="--d:0.18s;">
+        <div>
+          <p class="svc-row-meta">Dugotrajni sjaj</p>
+          <h4 class="svc-row-title">Gel lak</h4>
+          <p class="svc-row-desc">Trajni premaz koji dugo čuva sjaj i ne ljušti se. Savršen završni detalj za vaše nokte.</p>
         </div>
+        <div class="svc-row-price">1.500 rsd</div>
+        <a href="#cenovnik" class="svc-row-link">Vidi cene →</a>
+      </div>
+
+      <div class="svc-row reveal-row" style="--d:0.27s;">
+        <div>
+          <p class="svc-row-meta">Nega tela</p>
+          <h4 class="svc-row-title">Anticelulit masaže</h4>
+          <p class="svc-row-desc">Intenzivna masaža koja stimuliše cirkulaciju i pomaže u borbi protiv celulita i zadebljale kože.</p>
+        </div>
+        <div class="svc-row-price">2.500 rsd</div>
+        <a href="#cenovnik" class="svc-row-link">Vidi cene →</a>
+      </div>
+
+      <div class="svc-row reveal-row" style="--d:0.36s;border-bottom:none;">
+        <div>
+          <p class="svc-row-meta">Frizerski salon</p>
+          <h4 class="svc-row-title">Frizerske usluge</h4>
+          <p class="svc-row-desc">Šišanje, feniranje i stilizovanje kose. Kompletan frizerski program dostupan u salonu.</p>
+        </div>
+        <div class="svc-row-price"></div>
+        <a href="#kontakt" class="svc-row-link">Zakaži →</a>
       </div>
 
     </div>
@@ -737,7 +910,7 @@
 <!-- ════════════════════════════════════════
      BEFORE & AFTER
 ════════════════════════════════════════ -->
-<section id="pre-posle" class="section-pad" style="padding:120px 56px;background:var(--linen);overflow:hidden;position:relative;">
+<section id="pre-posle" class="section-pad" style="padding:120px 56px;background:#FAF7F2;overflow:hidden;position:relative;">
 
   <div aria-hidden="true"
        style="position:absolute;right:-60px;bottom:-60px;font-family:'Cormorant Garamond',serif;font-size:420px;font-weight:300;line-height:1;color:rgba(221,209,195,0.22);pointer-events:none;user-select:none;letter-spacing:-0.06em;">∞</div>
@@ -758,10 +931,10 @@
       <!-- Tretmani lica -->
       <div class="reveal-scale" style="--d:0.04s;">
         <div class="comp-wrap" style="position:relative;overflow:hidden;aspect-ratio:3/4;cursor:ew-resize;user-select:none;-webkit-user-select:none;">
-          <img src="https://placehold.co/480x640/C9B8A8/8A7362?text=Pre" alt="Tretmani lica — pre tretmanom"
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=480&h=640&fit=crop&auto=format&q=80" alt="Tretmani lica, pre tretmana"
                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           <div class="comp-after" style="position:absolute;inset:0;clip-path:inset(0 0 0 50%);">
-            <img src="https://placehold.co/480x640/F4EDE4/C24371?text=Posle" alt="Tretmani lica — posle tretmana"
+            <img src="https://images.unsplash.com/photo-1728727217834-b190862837a3?w=480&h=640&fit=crop&auto=format&q=80" alt="Tretmani lica, posle tretmana"
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.08) 0%,transparent 35%,rgba(28,21,16,0.52) 100%);pointer-events:none;"></div>
@@ -784,10 +957,10 @@
       <!-- Depilacija -->
       <div class="reveal-scale" style="--d:0.12s;">
         <div class="comp-wrap" style="position:relative;overflow:hidden;aspect-ratio:3/4;cursor:ew-resize;user-select:none;-webkit-user-select:none;">
-          <img src="https://placehold.co/480x640/DDD1C3/8A7362?text=Pre" alt="Depilacija — pre tretmanom"
+          <img src="https://images.unsplash.com/photo-1769028857040-b63673bf3557?w=480&h=640&fit=crop&auto=format&q=80" alt="Depilacija, pre tretmana"
                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           <div class="comp-after" style="position:absolute;inset:0;clip-path:inset(0 0 0 50%);">
-            <img src="https://placehold.co/480x640/FAF7F3/C24371?text=Posle" alt="Depilacija — posle tretmana"
+            <img src="https://images.unsplash.com/photo-1716363120131-2aa0e8bb5fba?w=480&h=640&fit=crop&auto=format&q=80" alt="Depilacija, posle tretmana"
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.08) 0%,transparent 35%,rgba(28,21,16,0.52) 100%);pointer-events:none;"></div>
@@ -810,10 +983,10 @@
       <!-- Medicinski pedikir -->
       <div class="reveal-scale" style="--d:0.2s;">
         <div class="comp-wrap" style="position:relative;overflow:hidden;aspect-ratio:3/4;cursor:ew-resize;user-select:none;-webkit-user-select:none;">
-          <img src="https://placehold.co/480x640/E6D9CC/6B5A4E?text=Pre" alt="Medicinski pedikir — pre tretmanom"
+          <img src="https://images.unsplash.com/photo-1577117633143-a2437fb9bdda?w=480&h=640&fit=crop&auto=format&q=80" alt="Medicinski pedikir, pre tretmana"
                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           <div class="comp-after" style="position:absolute;inset:0;clip-path:inset(0 0 0 50%);">
-            <img src="https://placehold.co/480x640/FDFBF8/9B3158?text=Posle" alt="Medicinski pedikir — posle tretmana"
+            <img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=480&h=640&fit=crop&auto=format&q=80" alt="Medicinski pedikir, posle tretmana"
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.08) 0%,transparent 35%,rgba(28,21,16,0.52) 100%);pointer-events:none;"></div>
@@ -882,13 +1055,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">M</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Milica S.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Tretman lica · Parafinsko pakovanje</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Medicinski pedikir</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Posle prvog parafinskog pakovanja koža mi je bila toliko mekša da nisam mogla da verujem. Odmah je vidljiva razlika — kao da su pore dubinski napunjene hidratacijom. Zakazala sam sledeći termin još dok sam bila u salonu."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Godinama me mučila zadebljala koža na petama i nisam znala da postoji pravi tretman za to. Ovde su mi prvi put stvarno objasnili u čemu je problem. Posle dva tretmana peta mi je kao nova, bez mučnih pilinga kod kuće."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -900,13 +1073,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">J</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Jelena M.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Depilacija hladnim voskom</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Tretman lica</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Konačno salon koji mi je objasnio zašto su patrone za jednokratnu upotrebu zaista važne. Tretman je blaži nego igde pre, a ja se osećam potpuno bezbedno. Godinu dana redovne mušterije — i ne planiram da menjam."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Imam mešovitu kožu koja je stalno imala zapušene pore i sitne bubuljice. Posle prvog dubokog čišćenja videla sam razliku odmah, ten ujednačeniji, koža mirnija. Sada dolazim jednom mesečno i nisam bila zadovoljnija."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -924,7 +1097,7 @@
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Imala sam problem s urasenim noktom koji me je mučio godinama. U Vebiri su se prema njemu odneli stručno i sa pravom pažnjom. Problem je rešen brzo i trajno — i konačno imam zdrava stopala."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Urasli nokti su me mučili dugo i izbegavala sam sandale. Ovde su prema tome pristupili ozbiljno, bez bola i bez crvenila. Prošla su tri meseca i problem se nije vratio. Konačno mogu da nosim šta hoću."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -936,13 +1109,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">T</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Tamara K.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Korekcija obrva · Depilacija</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Parafinsko pakovanje</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Nikada nisam bila zadovoljna oblikom svojih obrva — razlikovale su se i nisam znala kome da se poverim. Ovde su me strpljivo saslušali, predložili oblik koji odgovara mom licu i izveli ga savršeno. Konačno se osećam kao ja."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Imala sam jako suvu kožu na rukama koja je pucala zimi. Probala sam parafinsko pakovanje gotovo slučajno i ne mogu da verujem koliko razlike može da napravi. Sledećeg dana koža je bila potpuno meka, kao da je nahranjena iznutra."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -954,13 +1127,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">D</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Dragana R.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Anticelulit masaža</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Tretman lica</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Upisala sam seriju anticelulit masaža s malo skepse, ali rezultati su me iznenadili već posle četvrtog tretmana — koža je zategnutija i osećam se lakše u telu. Tehnika je snažna, ali podnošljiva. Sada je to moja redovna mesečna rutina."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Tražila sam tretman za tamnije fleke i umornu kožu. Vlasnica je odmah procenila stanje i predložila odgovarajući tretman, bez skupih nepotrebnih stvari. Posle tri tretmana razlika je vidljiva i drugima, ne samo meni."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -972,13 +1145,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">N</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Nataša J.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Masaža lica · Tretman lica</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Medicinski pedikir</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Masaža lica u Vebiri je pravi mali ritual koji sam uvrstila u mesečnu rutinu. Posle tretmana lice mi je sjajno i opuštenih mišića, koža blistava. Pravo mi treba u periodima stresa kada koža prva pokaže zamor."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Imala sam problem sa gljivicama na noktima koji se vukao mesecima. Ovde su mi konačno dali ozbiljan tretman i jasne savete kako to sprečiti ubuduće. Posle serije tretmana nokti su zdravi i dolazim redovno kao mera opreza."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -990,13 +1163,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">I</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Ivana B.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Depilacija hladnim voskom · Cele noge</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Depilacija hladnim voskom</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Ceo život sam koristila topli vosak i navikla se na crvenilo i iritaciju kao nešto normalno. Prešla sam na hladni vosak i razlika je ogromna — nema iritacije, koža je mirna odmah posle tretmana. Jedino žalim što nisam ranije otkrila ovu tehniku."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Imam jako osetljivu kožu i posle klasične depilacije uvek bih imala urasle dlačice danima. Ovde su mi preporučili hladni vosak sa biljnim ekstraktima i taj problem je nestao. Koža je mirna odmah posle, bez ikakvog crvenila."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -1008,13 +1181,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">S</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Sonja V.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Tretman lica · Dugotrajna klijentkinja</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Tretman lica</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Dolazim u Vebiru više od tri godine i svaki tretman je isti visoki nivo. Vlasnica svakom klijentu posvećuje pravu pažnju — pita, pamti, prilagođava. Osećate da ste u rukama nekoga ko zaista voli svoj posao."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Dolazim skoro dve godine na tretmane lica i ono što cenim je što vlasnica uvek pita kako je koža reagovala od prošlog puta i prilagođava tretman prema tome. Osećate da neko zaista brine o rezultatu."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -1026,13 +1199,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">K</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Katarina Đ.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Estetski pedikir · Gel lak</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Parafinsko pakovanje</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Tražila sam salon gde mogu da uradim i pedikir i gel lak u jednoj poseti — bez trčanja na dva mesta. Ovde je sve besprekorno: stopala mekana, lak savršeno nanesen i traje pune tri nedelje bez ljuštenja. Sad sam redovna i za jedno i za drugo."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Mislila sam da je parafinsko pakovanje nešto samo za zimu. Probala sam u junu i bila sam prijatno iznenađena. Koža je bila neverovatno meka i negovana, bez masnog osećaja. Sada ga radim redovno, nije vezano za godišnje doba."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -1044,13 +1217,13 @@
                 <div style="width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--rose);border:2px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Jost',sans-serif;font-size:16px;font-weight:500;color:#fff;line-height:1;">B</span></div>
                 <div>
                   <p style="font-family:'Jost',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.03em;color:rgba(255,255,255,0.88);margin-bottom:4px;">Bojana M.</p>
-                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Depilacija pazuha · Nausnice</p>
+                  <p class="overline" style="color:var(--rose);opacity:0.72;font-size:10px;margin:0;">Depilacija hladnim voskom</p>
                 </div>
               </div>
               <div style="display:flex;gap:3px;align-items:center;"><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg><svg width="13" height="13"><use href="#icon-star"/></svg></div>
             </div>
             <div style="width:100%;height:1px;background:rgba(255,255,255,0.07);margin-bottom:22px;"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Depilacija pazuha i nausnica traži brz, precizan tretman bez iritacije. Hladni vosak iz patrona je zaista blaži od svega što sam probala pre — nema crvenila, koža je mirna odmah. A osećaj sigurnosti od jednokratnih patrona je posebna vrednost."</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.65vw,19px);font-weight:300;font-style:italic;line-height:1.78;color:rgba(255,255,255,0.78);flex:1;">"Prešla sam na hladni vosak pre par meseci i ne bih se vraćala na staro. Nema trganja koje sam se plašila, nema crvenila. Važno mi je i to što koriste jednokratne patrone, uvek se osećam sigurno i znam da je higijena na prvom mestu."</p>
             <p style="margin-top:16px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:right;">Proverena mušterija</p>
           </div>
 
@@ -1094,7 +1267,7 @@
 <!-- ════════════════════════════════════════
      CENOVNIK
 ════════════════════════════════════════ -->
-<section id="cenovnik" class="section-pad" style="padding:120px 56px;background:var(--linen);">
+<section id="cenovnik" class="section-pad" style="padding:120px 56px;background:#FAF7F2;">
   <div style="max-width:1200px;margin:0 auto;">
 
     <div style="text-align:center;margin-bottom:72px;">
@@ -1170,7 +1343,7 @@
 <!-- ════════════════════════════════════════
      KONTAKT + CTA
 ════════════════════════════════════════ -->
-<section id="kontakt" style="background:var(--parchment);">
+<section id="kontakt" style="background:#FAF7F2;">
 
   <!-- CTA Banner -->
   <div style="background:var(--espresso);padding:84px 56px;position:relative;overflow:hidden;" class="section-pad">
@@ -1193,7 +1366,7 @@
   </div>
 
   <!-- Form + Info -->
-  <div id="kontakt-forma" style="padding:80px 56px;background:var(--linen);" class="section-pad">
+  <div id="kontakt-forma" style="padding:80px 56px;background:#FAF7F2;" class="section-pad">
     <div style="max-width:1200px;margin:0 auto;">
 
       <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);">
@@ -1298,15 +1471,15 @@
               <div style="display:flex;flex-direction:column;gap:10px;">
                 <div style="display:flex;justify-content:space-between;">
                   <span style="font-size:15px;font-weight:300;color:var(--taupe);">Ponedeljak – Petak</span>
-                  <span style="font-size:15px;font-weight:500;color:var(--ink);">09:00 – 20:00</span>
+                  <span style="font-size:15px;font-weight:500;color:var(--ink);">09:00 – 19:00</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;">
                   <span style="font-size:15px;font-weight:300;color:var(--taupe);">Subota</span>
-                  <span style="font-size:15px;font-weight:500;color:var(--ink);">09:00 – 17:00</span>
+                  <span style="font-size:15px;font-weight:500;color:var(--ink);">09:00 – 16:00</span>
                 </div>
                 <div style="display:flex;justify-content:space-between;">
                   <span style="font-size:15px;font-weight:300;color:var(--taupe);">Nedelja</span>
-                  <span style="font-size:13px;color:var(--bark);font-weight:300;font-style:italic;">Po dogovoru</span>
+                  <span style="font-size:15px;font-weight:500;color:var(--ink);">09:00 – 16:00</span>
                 </div>
               </div>
             </div>
@@ -1323,46 +1496,111 @@
 <!-- ════════════════════════════════════════
      FOOTER
 ════════════════════════════════════════ -->
-<footer style="background:var(--espresso);padding:80px 0 36px;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 56px;">
+<footer style="position:relative;background:var(--espresso);overflow:hidden;">
 
-    <div style="display:flex;justify-content:center;margin-bottom:56px;">
-      <img src="brand-assets/Logo/full-logo-transparent.png" alt="Salon Vebira"
-           style="height:52px;width:auto;filter:brightness(0) invert(1);opacity:0.82;">
+  <!-- Ambient glow -->
+  <div class="footer-glow" style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%, rgba(194,67,113,0.11) 0%, transparent 65%),radial-gradient(ellipse 35% 50% at 4% 100%, rgba(194,67,113,0.06) 0%, transparent 55%),radial-gradient(ellipse 35% 50% at 96% 100%, rgba(194,67,113,0.06) 0%, transparent 55%);pointer-events:none;"></div>
+
+  <!-- Top accent line -->
+  <div class="footer-accent-line" style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg, transparent 0%, rgba(194,67,113,0.28) 25%, rgba(194,67,113,0.55) 50%, rgba(194,67,113,0.28) 75%, transparent 100%);"></div>
+
+  <div class="footer-inner" style="max-width:1200px;margin:0 auto;padding:80px 56px 44px;position:relative;">
+
+    <!-- Large logo -->
+    <div style="display:flex;justify-content:center;margin-bottom:18px;">
+      <img src="resources/Full-logo-uvecano-transparento.png" alt="Salon Vebira"
+           class="footer-logo" style="height:180px;width:auto;opacity:0.95;">
     </div>
 
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);" class="footer-grid">
+    <!-- Tagline -->
+    <p class="footer-tagline" style="text-align:center;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:60px;font-weight:300;">Kozmetičko-frizerski salon · Beograd</p>
 
+    <!-- Social icons -->
+    <div class="footer-social" style="display:flex;justify-content:center;gap:16px;margin-bottom:48px;">
+      <a href="https://www.instagram.com/salon_vebira/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-link" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(194,67,113,0.22);background:rgba(194,67,113,0.06);color:rgba(255,255,255,0.38);text-decoration:none;transition:border-color 0.22s,background 0.22s,color 0.22s;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=100063519185428" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon-link" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(194,67,113,0.22);background:rgba(194,67,113,0.06);color:rgba(255,255,255,0.38);text-decoration:none;transition:border-color 0.22s,background 0.22s,color 0.22s;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Decorative separator -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:56px;">
+      <div style="flex:1;height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.07));"></div>
+      <div style="display:flex;gap:7px;align-items:center;">
+        <div style="width:4px;height:4px;border-radius:50%;background:rgba(194,67,113,0.4);"></div>
+        <div style="width:7px;height:7px;border-radius:50%;background:rgba(194,67,113,0.62);"></div>
+        <div style="width:4px;height:4px;border-radius:50%;background:rgba(194,67,113,0.4);"></div>
+      </div>
+      <div style="flex:1;height:1px;background:linear-gradient(270deg, transparent, rgba(255,255,255,0.07));"></div>
+    </div>
+
+    <!-- Three columns -->
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:56px;" class="footer-grid">
+
+      <!-- Col 1: About -->
       <div>
-        <p style="font-size:15px;font-weight:300;line-height:1.9;max-width:300px;color:rgba(255,255,255,0.42);">
-          Kozmetičko-frizerski salon u Beogradu. Prirodna rešenja, proverene metode — vaša lepota i zdravlje na prvom mestu.
+        <p style="font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--rose);opacity:0.6;margin-bottom:18px;font-weight:500;">O salonu</p>
+        <p style="font-size:14.5px;font-weight:300;line-height:1.95;max-width:290px;color:rgba(255,255,255,0.36);">
+          Više od 20 godina posvećeni vašoj lepoti i zdravlju. Prirodna rešenja, proverene metode i tretmani koji spajaju estetiku s negom.
         </p>
       </div>
 
+      <!-- Col 2: Navigation -->
       <div>
-        <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:24px;">Navigacija</p>
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <a href="#o-nama"   class="footer-link" style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);text-decoration:none;transition:color 0.2s;">O nama</a>
-          <a href="#usluge"   class="footer-link" style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);text-decoration:none;transition:color 0.2s;">Usluge</a>
-          <a href="#cenovnik" class="footer-link" style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);text-decoration:none;transition:color 0.2s;">Cenovnik</a>
-          <a href="#kontakt"  class="footer-link" style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);text-decoration:none;transition:color 0.2s;">Kontakt</a>
+        <p style="font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--rose);opacity:0.6;margin-bottom:18px;font-weight:500;">Navigacija</p>
+        <div style="display:flex;flex-direction:column;gap:13px;">
+          <a href="#o-nama"   class="footer-link" style="font-size:14.5px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.22s;display:inline-flex;align-items:center;gap:9px;">
+            <span class="footer-link-bar" style="width:14px;height:1px;background:rgba(194,67,113,0.38);display:inline-block;flex-shrink:0;transition:width 0.22s,background 0.22s;"></span>O nama
+          </a>
+          <a href="#usluge"   class="footer-link" style="font-size:14.5px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.22s;display:inline-flex;align-items:center;gap:9px;">
+            <span class="footer-link-bar" style="width:14px;height:1px;background:rgba(194,67,113,0.38);display:inline-block;flex-shrink:0;transition:width 0.22s,background 0.22s;"></span>Usluge
+          </a>
+          <a href="#cenovnik" class="footer-link" style="font-size:14.5px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.22s;display:inline-flex;align-items:center;gap:9px;">
+            <span class="footer-link-bar" style="width:14px;height:1px;background:rgba(194,67,113,0.38);display:inline-block;flex-shrink:0;transition:width 0.22s,background 0.22s;"></span>Cenovnik
+          </a>
+          <a href="#kontakt"  class="footer-link" style="font-size:14.5px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.22s;display:inline-flex;align-items:center;gap:9px;">
+            <span class="footer-link-bar" style="width:14px;height:1px;background:rgba(194,67,113,0.38);display:inline-block;flex-shrink:0;transition:width 0.22s,background 0.22s;"></span>Kontakt
+          </a>
         </div>
       </div>
 
+      <!-- Col 3: Contact -->
       <div>
-        <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:24px;">Kontakt</p>
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);">Ratka Mitrovića 162/20<br>Beograd</p>
-          <a href="tel:0641654676" class="footer-link" style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);text-decoration:none;transition:color 0.2s;">064 165 4676</a>
-          <a href="mailto:salonvebira@gmail.com" class="footer-link" style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.48);text-decoration:none;transition:color 0.2s;">salonvebira@gmail.com</a>
+        <p style="font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:var(--rose);opacity:0.6;margin-bottom:18px;font-weight:500;">Kontakt</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(194,67,113,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <p style="font-size:14px;font-weight:300;line-height:1.78;color:rgba(255,255,255,0.36);margin:0;">Ratka Mitrovića 162/20<br>Beograd</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(194,67,113,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.57a16 16 0 0 0 6 6l.87-1.88a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:0641654676" class="footer-link" style="font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.22s;">064 165 4676</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(194,67,113,0.5)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:salonvebira@gmail.com" class="footer-link" style="font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.22s;">salonvebira@gmail.com</a>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div style="padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <p style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.18);">© 2025 Salon Vebira. Sva prava zadržana.</p>
-      <p style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.12);">Kozmetički salon · Beograd</p>
+    <!-- Bottom bar -->
+    <div class="footer-bottom" style="padding-top:26px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <p style="font-size:12.5px;font-weight:300;color:rgba(255,255,255,0.14);">© 2026 Salon Vebira. Sva prava zadržana.</p>
+      <div class="footer-bottom-links" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
+        <a href="privacy-policy.html" style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.22s;" onmouseover="this.style.color='rgba(255,255,255,0.62)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">Politika privatnosti</a>
+        <a href="cookie-policy.html"  style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.22s;" onmouseover="this.style.color='rgba(255,255,255,0.62)'" onmouseout="this.style.color='rgba(255,255,255,0.22)'">Politika kolačića</a>
+      </div>
+      <p style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.14);">Napravljeno od strane <a href="https://felicoagency.com" target="_blank" rel="noopener" style="color:rgba(194,67,113,0.55);text-decoration:none;transition:color 0.22s;" onmouseover="this.style.color='rgba(194,67,113,0.9)'" onmouseout="this.style.color='rgba(194,67,113,0.55)'">felicoagency.com</a></p>
     </div>
   </div>
 </footer>
@@ -1400,14 +1638,23 @@
   applyResponsive();
   window.addEventListener('resize', applyResponsive);
 
-  hamBtn.addEventListener('click', () => {
-    mobMenu.classList.toggle('open');
-    hamBtn.classList.toggle('open');
-  });
+  function openMenu() {
+    mobMenu.style.display = 'flex';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      mobMenu.classList.add('open');
+    }));
+    hamBtn.classList.add('open');
+  }
   function closeMenu() {
     mobMenu.classList.remove('open');
     hamBtn.classList.remove('open');
+    mobMenu.addEventListener('transitionend', () => {
+      if (!mobMenu.classList.contains('open')) mobMenu.style.display = 'none';
+    }, { once: true });
   }
+  hamBtn.addEventListener('click', () => {
+    mobMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
 
   /* ── Nav scroll state + progress bar ── */
   window.addEventListener('scroll', () => {
@@ -1421,13 +1668,13 @@
     if (max > 0) scrollProg.style.width = (window.scrollY / max * 100) + '%';
   }, { passive: true });
 
-  /* ── Hero image parallax ── */
-  const heroImg = document.getElementById('hero-img');
-  const heroEl  = document.getElementById('hero');
+  /* ── Hero video parallax ── */
+  const heroVideo = document.getElementById('hero-video');
+  const heroEl    = document.getElementById('hero');
   window.addEventListener('scroll', () => {
     const s = window.scrollY;
     if (s < heroEl.offsetHeight * 1.2) {
-      heroImg.style.transform = `translateY(${s * 0.28}px)`;
+      heroVideo.style.transform = `translateY(${s * 0.18}px)`;
     }
   }, { passive: true });
 
@@ -1440,7 +1687,7 @@
   });
 
   /* ── Scroll reveal (all variants) ── */
-  const revealSel = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade, .line-grow';
+  const revealSel = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade, .line-grow, .reveal-row';
   const allReveal = document.querySelectorAll(revealSel);
 
   const obs = new IntersectionObserver((entries) => {
@@ -1480,8 +1727,15 @@
 
   /* ── Footer links hover ── */
   document.querySelectorAll('.footer-link').forEach(el => {
-    el.addEventListener('mouseenter', () => { el.style.color = '#fff'; });
-    el.addEventListener('mouseleave', () => { el.style.color = 'rgba(255,255,255,0.48)'; });
+    const bar = el.querySelector('.footer-link-bar');
+    el.addEventListener('mouseenter', () => {
+      el.style.color = '#fff';
+      if (bar) { bar.style.width = '22px'; bar.style.background = 'rgba(194,67,113,0.75)'; }
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.color = 'rgba(255,255,255,0.4)';
+      if (bar) { bar.style.width = '14px'; bar.style.background = 'rgba(194,67,113,0.38)'; }
+    });
   });
 
   /* ── Before & After comparison sliders ── */
@@ -1558,7 +1812,7 @@
 
     function resetTimer() {
       clearInterval(timer);
-      timer = setInterval(function() { goto((idx + 1) % N, 1); }, 6000);
+      timer = setInterval(function() { goto((idx + 1) % N, 1); }, 10000);
     }
     resetTimer();
 
@@ -1636,17 +1890,48 @@
       }
     });
     if (!valid) return;
-    form.style.opacity = '0';
-    form.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => {
-      form.style.display = 'none';
-      const msg = document.getElementById('success-msg');
-      msg.style.display = 'block';
-      msg.style.opacity = '0';
-      msg.style.transition = 'opacity 0.5s ease';
-      setTimeout(() => { msg.style.opacity = '1'; }, 20);
-    }, 300);
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Slanje...';
+
+    const templateParams = {
+      from_name:  document.getElementById('name').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+      from_email: document.getElementById('email').value.trim() || 'nije unet',
+      service:    document.getElementById('service').value,
+      message:    document.getElementById('message').value.trim() || 'nije unesena',
+    };
+
+    emailjs.send('service_964sxh6', 'template_6gt6bvi', templateParams)
+      .then(() => {
+        form.style.opacity = '0';
+        form.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => {
+          form.style.display = 'none';
+          const msg = document.getElementById('success-msg');
+          msg.style.display = 'block';
+          msg.style.opacity = '0';
+          msg.style.transition = 'opacity 0.5s ease';
+          setTimeout(() => { msg.style.opacity = '1'; }, 20);
+        }, 300);
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
+        btn.disabled = false;
+        btn.textContent = originalText;
+        let errEl = document.getElementById('form-error');
+        if (!errEl) {
+          errEl = document.createElement('p');
+          errEl.id = 'form-error';
+          errEl.style.cssText = 'font-size:14px;color:var(--rose);margin-top:8px;text-align:center;';
+          btn.parentNode.insertBefore(errEl, btn.nextSibling);
+        }
+        errEl.textContent = 'Greška pri slanju. Pokušajte ponovo ili nas pozovite direktno.';
+      });
   }
+
 </script>
 
 
