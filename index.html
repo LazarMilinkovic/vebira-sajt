@@ -3,20 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Salon Vebira, kozmetičko-frizerski salon u Beogradu. Depilacija hladnim voskom, medicinski pedikir, tretmani lica sa biljnim ekstraktima. Ratka Mitrovića 162/20.">
-  <title>Salon Vebira | Kozmetički salon Beograd</title>
+  <meta name="description" content="Salon Vebira — kozmetički salon u Beogradu sa 20+ godina iskustva. Individualna nega lica i problematične kože, parafinska pakovanja i medicinski pedikir. Zakažite termin.">
+  <title>Salon Vebira — Tretmani lica i medicinski pedikir | Beograd</title>
+  <link rel="canonical" href="https://salonvebira.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sr_RS">
+  <meta property="og:site_name" content="Salon Vebira">
+  <meta property="og:url" content="https://salonvebira.com/">
+  <meta property="og:title" content="Salon Vebira — individualna nega lica i medicinski pedikir, Beograd">
+  <meta property="og:description" content="Kozmetički salon u Beogradu sa 20+ godina iskustva. Tretmani lica, parafinska pakovanja i medicinski pedikir — pristup zasnovan na poverenju i rezultatima.">
+  <meta property="og:image" content="https://salonvebira.com/resources/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Salon Vebira — kozmetičko-frizerski salon, Beograd">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Salon Vebira — nega lica i medicinski pedikir, Beograd">
+  <meta name="twitter:description" content="Kozmetički salon u Beogradu sa 20+ godina iskustva. Individualna nega lica i medicinski pedikir.">
+  <meta name="twitter:image" content="https://salonvebira.com/resources/og-image.jpg">
+
   <link rel="icon" type="image/png" href="brand-assets/Logo/girl-from-logo.png">
   <link rel="apple-touch-icon" href="brand-assets/Logo/girl-from-logo.png">
+
+  <!-- Structured data: LocalBusiness (BeautySalon) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "@id": "https://salonvebira.com/#salon",
+    "name": "Salon Vebira",
+    "description": "Kozmetičko-frizerski salon u Beogradu sa više od 20 godina iskustva. Individualna nega lica i problematične kože, parafinska pakovanja, masaže lica i medicinski pedikir — pristup zasnovan na poverenju, stručnosti i rezultatima.",
+    "url": "https://salonvebira.com/",
+    "logo": "https://salonvebira.com/resources/Full-logo-uvecano-transparento.png",
+    "image": "https://salonvebira.com/resources/og-image.jpg",
+    "telephone": "+381641654676",
+    "email": "salonvebira@gmail.com",
+    "priceRange": "RSD 400–3.000",
+    "currenciesAccepted": "RSD",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ratka Mitrovića 162/20",
+      "addressLocality": "Beograd",
+      "addressRegion": "Žarkovo",
+      "postalCode": "11090",
+      "addressCountry": "RS"
+    },
+    "hasMap": "https://maps.google.com/maps?q=Salon+Vebira,+Ratka+Mitrovića+162,+Beograd",
+    "areaServed": { "@type": "City", "name": "Beograd" },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "09:00",
+        "closes": "16:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/salon_vebira/",
+      "https://www.facebook.com/profile.php?id=100063519185428"
+    ],
+    "makesOffer": [
+      { "@type": "Offer", "priceCurrency": "RSD", "price": "3000", "itemOffered": { "@type": "Service", "name": "Tretman lica" } },
+      { "@type": "Offer", "priceCurrency": "RSD", "price": "1500", "itemOffered": { "@type": "Service", "name": "Parafinsko pakovanje lica" } },
+      { "@type": "Offer", "priceCurrency": "RSD", "price": "1300", "itemOffered": { "@type": "Service", "name": "Masaža lica" } },
+      { "@type": "Offer", "priceCurrency": "RSD", "price": "700", "itemOffered": { "@type": "Service", "name": "Depilacija hladnim voskom" } },
+      { "@type": "Offer", "priceCurrency": "RSD", "price": "2500", "itemOffered": { "@type": "Service", "name": "Anticelulit masaža" } },
+      { "@type": "Offer", "priceCurrency": "RSD", "price": "1800", "itemOffered": { "@type": "Service", "name": "Medicinski pedikir" } }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    (function() {
-      emailjs.init({ publicKey: 'T4T1k94jXIaHu-w92' });
-    })();
+    // EmailJS lib is deferred; init once it (and the DOM) are ready.
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.emailjs) emailjs.init({ publicKey: 'T4T1k94jXIaHu-w92' });
+    });
   </script>
 
   <style>
@@ -617,12 +692,14 @@
   <!-- Video background — Seedance AI (4 MB, loops silently) -->
   <video id="hero-video"
          autoplay muted loop playsinline
-         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform;">
-    <source src="resources/Animate_this_background_I_need_Seedance_20_25198.mp4" type="video/mp4">
+         preload="metadata"
+         poster="resources/hero-poster.jpg"
+         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:var(--bark);will-change:transform;">
+    <source src="resources/hf_20260617_111559_b38cc993-6da4-4746-835b-8a438b80b94e.mp4" type="video/mp4">
   </video>
 
   <!-- Dark brand overlay — espresso base + warm rose accent -->
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(122,98,83,0.87) 0%,rgba(122,98,83,0.68) 40%,rgba(122,98,83,0.95) 100%);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(122,98,83,0.78) 0%,rgba(122,98,83,0.58) 40%,rgba(122,98,83,0.88) 100%);"></div>
   <div style="position:absolute;inset:0;background:linear-gradient(145deg,rgba(122,98,83,0.20) 0%,transparent 58%);mix-blend-mode:overlay;pointer-events:none;"></div>
 
   <!-- Content — vertically centered, pulled right from left edge -->
@@ -638,6 +715,10 @@
         <span class="clip-wrap"><span class="clip-inner" style="--d:0.22s;color:#C24371;">Priroda</span></span>
         <span class="clip-wrap"><em class="clip-inner" style="--d:0.42s;font-style:italic;">zna najbolje.</em></span>
       </h1>
+
+      <p class="reveal-fade" style="max-width:520px;font-size:clamp(16px,1.5vw,19px);font-weight:300;line-height:1.7;color:rgba(255,255,255,0.82);margin-bottom:40px;--d:0.62s;">
+        Više od 20 godina individualno prilagođene nege lica i kože u Beogradu. Biljna rešenja i stručno vođenje — tretmani lica, parafinska pakovanja i medicinski pedikir koji rešavaju uzrok, ne samo simptom.
+      </p>
 
       <div class="reveal-fade" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;--d:0.82s;">
         <a href="#kontakt" class="btn btn-outline-light">Zakaži termin</a>
@@ -685,25 +766,25 @@
 
       <div class="reveal" style="background:var(--parchment);padding:44px 36px;--d:0.04s;">
         <div class="line-grow" style="width:36px;height:2px;background:var(--rose);margin-bottom:28px;--d:0.28s;"></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Higijenska<br>nesigurnost</h3>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Problem koji<br>se stalno vraća</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--taupe);">
-          U većini salona isti topli vosak koristi više klijenata bez menjanja. Bakterije i gljivice prelaze s jedne kože na drugu. To se ne dešava tamo gde se patrone bacaju posle svakog klijenta.
+          Akne i mitiseri se vraćaju, a preparati i saveti sa interneta daju kratkotrajne rezultate ili nikakve. Bez razumevanja pravog uzroka, novac se troši bez jasnog plana koji zaista funkcioniše.
         </p>
       </div>
 
       <div class="reveal" style="background:var(--parchment);padding:44px 36px;--d:0.12s;">
         <div class="line-grow" style="width:36px;height:2px;background:var(--rose);margin-bottom:28px;--d:0.38s;"></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Koža koja<br>plati cenu</h3>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Koža bez<br>sjaja i tonusa</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--taupe);">
-          Depilacija i dubinsko čišćenje lica mogu ostaviti kožu suvu i nadraženu. Biljni ekstrakti u patronama nisu marketinški detalj, nego zaštita kože tokom samog tretmana.
+          Vremenom koža gubi svežinu i elastičnost — javljaju se suvoća i prve bore. Agresivne procedure i igle nisu odgovor; potrebna je redovna, nežna nega koja vraća prirodan i odmoran izgled.
         </p>
       </div>
 
       <div class="reveal" style="background:var(--parchment);padding:44px 36px;--d:0.2s;">
         <div class="line-grow" style="width:36px;height:2px;background:var(--rose);margin-bottom:28px;--d:0.48s;"></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Površinski<br>pristup</h3>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:400;color:var(--ink);margin-bottom:14px;line-height:1.15;">Stopala koja<br>bole pri hodu</h3>
         <p style="font-size:15px;font-weight:300;line-height:1.85;color:var(--taupe);">
-          Urasli nokti, žuljevi i zadebljala koža su medicinski problemi. Estetski pedikir ih uklanja privremeno. Medicinski pedikir ide do uzroka.
+          Urasli nokti, ispucale pete, kurje oči i žuljevi nisu estetski, već zdravstveni problem. Estetski pedikir ih ublaži privremeno — uzrok ostaje. Potreban je stručan, medicinski pristup.
         </p>
       </div>
 
@@ -779,6 +860,51 @@
 
 
 <!-- ════════════════════════════════════════
+     ZAŠTO NAM VERUJU  (E-E-A-T / trust)
+════════════════════════════════════════ -->
+<section id="poverenje" class="section-pad" style="padding:104px 56px;background:var(--espresso);position:relative;overflow:hidden;">
+
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(194,67,113,0.10) 0%,transparent 64%);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+
+    <div style="text-align:center;margin-bottom:64px;">
+      <p class="overline reveal" style="color:rgba(255,255,255,0.3);margin-bottom:16px;">Zašto Vebira</p>
+      <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4.6vw,64px);font-weight:300;line-height:1;letter-spacing:-0.02em;color:#fff;--d:0.08s;">
+        Poverenje koje se <em style="font-style:italic;color:var(--rose);">gradi godinama</em>
+      </h2>
+      <p class="reveal" style="max-width:600px;margin:24px auto 0;font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.6);--d:0.16s;">
+        Ne utrkujemo se sa najnovijim aparatima ni pomodnim procedurama. Naša snaga je iskustvo, individualni pristup i rezultat kojem se klijenti vraćaju.
+      </p>
+    </div>
+
+    <div class="three-col" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.1);">
+
+      <div class="reveal" style="background:var(--espresso);padding:42px 36px;--d:0.04s;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;line-height:1;color:var(--rose);margin-bottom:18px;">20+</p>
+        <h3 style="font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#fff;margin-bottom:14px;">Godina iskustva</h3>
+        <p style="font-size:15px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.6);">Više od dve decenije rada sa kožom lica i tela u Beogradu — znanje koje se ne stiče preko noći.</p>
+      </div>
+
+      <div class="reveal" style="background:var(--espresso);padding:42px 36px;--d:0.12s;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;line-height:1;color:var(--rose);margin-bottom:18px;">1:1</p>
+        <h3 style="font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#fff;margin-bottom:14px;">Individualni pristup</h3>
+        <p style="font-size:15px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.6);">Svaki tretman počinje analizom vaše kože i jasnim planom — ne gotovim paketom koji odgovara svima.</p>
+      </div>
+
+      <div class="reveal" style="background:var(--espresso);padding:42px 36px;--d:0.2s;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;line-height:1;color:var(--rose);margin-bottom:18px;">∿</p>
+        <h3 style="font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#fff;margin-bottom:14px;">Zdravlje pre trenda</h3>
+        <p style="font-size:15px;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.6);">Biljna rešenja, sterilni instrumentarijum i provereni protokoli — bez agresivnih, pomodnih procedura.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
      USLUGE
 ════════════════════════════════════════ -->
 <section id="usluge" class="section-pad" style="padding:120px 56px;background:#FAF7F2;">
@@ -809,7 +935,7 @@
         </h3>
         <div style="width:36px;height:1px;background:var(--rose);margin-bottom:22px;"></div>
         <p style="font-size:16px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.72);margin-bottom:36px;flex:1;">
-          Biljna rešenja za kožu koja zaslužuje pažnju. Svaki tretman prilagođen tipu vaše kože: dubinsko čišćenje, hranjenje i hidratacija uz prirodne botaničke ekstrakte.
+          Za masnu i problematičnu kožu sklonu aknama i mitiserima. Počinjemo analizom vaše kože i pravimo plan koji rešava uzrok — dubinsko čišćenje, biljni ekstrakti i nega prilagođena baš vama.
         </p>
         <div style="border-top:1px solid rgba(255,255,255,0.18);margin-bottom:32px;">
           <div style="display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.12);">
@@ -954,10 +1080,10 @@
       <!-- Tretmani lica -->
       <div class="reveal-scale" style="--d:0.04s;">
         <div class="comp-wrap" style="position:relative;overflow:hidden;aspect-ratio:3/4;cursor:ew-resize;user-select:none;-webkit-user-select:none;">
-          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=480&h=640&fit=crop&auto=format&q=80" alt="Tretmani lica, pre tretmana"
+          <img src="resources/photos/pre-posle/lice-pre.jpg" alt="Tretmani lica, pre tretmana"
                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           <div class="comp-after" style="position:absolute;inset:0;clip-path:inset(0 0 0 50%);">
-            <img src="https://images.unsplash.com/photo-1728727217834-b190862837a3?w=480&h=640&fit=crop&auto=format&q=80" alt="Tretmani lica, posle tretmana"
+            <img src="resources/photos/pre-posle/lice-posle.jpg" alt="Tretmani lica, posle tretmana"
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.08) 0%,transparent 35%,rgba(28,21,16,0.52) 100%);pointer-events:none;"></div>
@@ -980,10 +1106,10 @@
       <!-- Depilacija -->
       <div class="reveal-scale" style="--d:0.12s;">
         <div class="comp-wrap" style="position:relative;overflow:hidden;aspect-ratio:3/4;cursor:ew-resize;user-select:none;-webkit-user-select:none;">
-          <img src="https://images.unsplash.com/photo-1769028857040-b63673bf3557?w=480&h=640&fit=crop&auto=format&q=80" alt="Depilacija, pre tretmana"
+          <img src="resources/photos/pre-posle/depilacija-pre.jpg" alt="Depilacija, pre tretmana"
                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           <div class="comp-after" style="position:absolute;inset:0;clip-path:inset(0 0 0 50%);">
-            <img src="https://images.unsplash.com/photo-1716363120131-2aa0e8bb5fba?w=480&h=640&fit=crop&auto=format&q=80" alt="Depilacija, posle tretmana"
+            <img src="resources/photos/pre-posle/depilacija-posle.jpg" alt="Depilacija, posle tretmana"
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.08) 0%,transparent 35%,rgba(28,21,16,0.52) 100%);pointer-events:none;"></div>
@@ -1006,10 +1132,10 @@
       <!-- Medicinski pedikir -->
       <div class="reveal-scale" style="--d:0.2s;">
         <div class="comp-wrap" style="position:relative;overflow:hidden;aspect-ratio:3/4;cursor:ew-resize;user-select:none;-webkit-user-select:none;">
-          <img src="https://images.unsplash.com/photo-1577117633143-a2437fb9bdda?w=480&h=640&fit=crop&auto=format&q=80" alt="Medicinski pedikir, pre tretmana"
+          <img src="resources/photos/pre-posle/pedikir-pre.jpg" alt="Medicinski pedikir, pre tretmana"
                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           <div class="comp-after" style="position:absolute;inset:0;clip-path:inset(0 0 0 50%);">
-            <img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=480&h=640&fit=crop&auto=format&q=80" alt="Medicinski pedikir, posle tretmana"
+            <img src="resources/photos/pre-posle/pedikir-posle.jpg" alt="Medicinski pedikir, posle tretmana"
                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
           </div>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,21,16,0.08) 0%,transparent 35%,rgba(28,21,16,0.52) 100%);pointer-events:none;"></div>
@@ -1057,6 +1183,9 @@
         Iskustva &amp; <em style="font-style:italic;color:var(--rose);">utisci</em>
       </h2>
       <div class="line-grow reveal-fade" style="width:44px;height:1px;background:var(--rose);margin:22px auto 0;transform-origin:center;--d:0.2s;"></div>
+      <p class="reveal" style="max-width:540px;margin:26px auto 0;font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.6);--d:0.26s;">
+        Naši klijenti ne hvale opremu — hvale rezultat, savet, pažnju i poverenje. Upravo na tome gradimo više od 20 godina.
+      </p>
     </div>
 
     <!-- Animated testimonials: [card-area | nav-column] -->
@@ -1360,6 +1489,122 @@
     </div>
 
   </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     FAQ
+════════════════════════════════════════ -->
+<section id="faq" class="section-pad" style="padding:120px 56px;background:#FAF7F2;position:relative;overflow:hidden;">
+
+  <style>
+    .faq-item { border-bottom:1px solid var(--border); transition:background 0.4s ease; }
+    .faq-item[open] { background:linear-gradient(180deg, rgba(194,67,113,0.035), rgba(194,67,113,0)); }
+    .faq-item > summary {
+      list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+      gap:24px; padding:26px 4px; font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2.2vw,26px);
+      font-weight:400; color:var(--ink); line-height:1.25; transition:color 0.3s cubic-bezier(.16,1,.3,1);
+    }
+    .faq-item > summary::-webkit-details-marker { display:none; }
+    .faq-item > summary::marker { content:''; }
+    .faq-item > summary:hover { color:var(--rose); }
+    .faq-item[open] > summary { color:var(--rose); }
+    .faq-item > summary:focus-visible { outline:2px solid var(--rose); outline-offset:4px; }
+    /* Icon sits in a circle that subtly fills when the answer opens */
+    .faq-icon-wrap {
+      flex-shrink:0; width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--border);
+      transition:background 0.45s cubic-bezier(.16,1,.3,1), border-color 0.45s cubic-bezier(.16,1,.3,1), transform 0.45s cubic-bezier(.16,1,.3,1);
+    }
+    .faq-item > summary:hover .faq-icon-wrap { border-color:var(--rose); transform:scale(1.06); }
+    .faq-item[open] .faq-icon-wrap { background:var(--rose); border-color:var(--rose); }
+    .faq-icon { width:18px; height:18px; transition:transform 0.5s cubic-bezier(.34,1.56,.64,1); color:var(--rose); }
+    .faq-item[open] .faq-icon { transform:rotate(135deg); color:#fff; }
+    /* Answer: height is driven by JS for a smooth slide; inner fades + slides up */
+    .faq-answer { overflow:hidden; height:0; }
+    .faq-answer-inner {
+      padding:2px 4px 32px; max-width:760px; font-size:16px; font-weight:300; line-height:1.85; color:var(--taupe);
+      opacity:0; transform:translateY(12px);
+      transition:opacity 0.5s ease, transform 0.6s cubic-bezier(.16,1,.3,1);
+    }
+    .faq-answer-inner.is-revealed { opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .faq-icon, .faq-icon-wrap, .faq-answer-inner { transition:none; }
+    }
+  </style>
+
+  <div style="max-width:860px;margin:0 auto;position:relative;">
+
+    <div style="text-align:center;margin-bottom:56px;">
+      <p class="overline reveal" style="margin-bottom:16px;">Česta pitanja</p>
+      <h2 class="reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,72px);font-weight:300;line-height:0.95;letter-spacing:-0.02em;color:var(--ink);--d:0.08s;">
+        Pitanja i <em style="font-style:italic;color:var(--rose);">odgovori</em>
+      </h2>
+      <div class="line-grow reveal-fade" style="width:44px;height:1px;background:var(--rose);margin:22px auto 0;transform-origin:center;--d:0.2s;"></div>
+    </div>
+
+    <div class="reveal" style="border-top:1px solid var(--border);--d:0.12s;">
+
+      <details class="faq-item">
+        <summary>Da li depilacija hladnim voskom boli?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="faq-answer">Hladni vosak je blaži po osećaju na koži od toplog, posebno na osetljivim zonama poput nausnica i prepona. Zahvaljujući patronama za jednokratnu upotrebu, tretman je brz i ravnomeran, uz manje nelagodnosti.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Po čemu se medicinski pedikir razlikuje od običnog?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="faq-answer">Estetski pedikir ulepšava zdrava stopala, dok se medicinski pedikir bavi zdravljem stopala — uraslim noktima, ispucalim petama (hiperkeratozama), žuljevima, kurjim okom i gljivičnim infekcijama. Radi se sterilnim instrumentarijumom uz kliničke protokole.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Koliko traje tretman lica i koliko često da dolazim?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="faq-answer">Tretman lica prilagođavamo tipu vaše kože, pa se trajanje i dinamika razlikuju. Posle analize kože predlažemo plan — za problematičnu kožu obično je potrebno nekoliko tretmana, a zatim redovno održavanje.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Da li je hladni vosak bezbedan za proširene vene i kapilare?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="faq-answer">Da. Za razliku od toplog voska, hladni vosak se preporučuje osobama sa proširenim venama ili kapilarima jer ne zagreva i ne širi krvne sudove.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Radite li sa osetljivom kožom sklonom aknama?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="faq-answer">Da — to je naš fokus. Koristimo biljne ekstrakte (azulen, argan, aloja, lavanda) i pristup prilagođen vašoj koži, sa ciljem da rešimo uzrok problema, a ne samo simptom.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Kako da zakažem termin?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="faq-answer">Najbrže telefonom na <a href="tel:0641654676" style="color:var(--rose);text-decoration:none;">064 165 4676</a>, ili popunite kontakt formu i javićemo vam se u najkraćem roku. Salon se nalazi na adresi Ratka Mitrovića 162/20, Beograd.</div>
+      </details>
+
+    </div>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Da li depilacija hladnim voskom boli?", "acceptedAnswer": { "@type": "Answer", "text": "Hladni vosak je blaži po osećaju na koži od toplog, posebno na osetljivim zonama poput nausnica i prepona. Zahvaljujući patronama za jednokratnu upotrebu, tretman je brz i ravnomeran, uz manje nelagodnosti." } },
+      { "@type": "Question", "name": "Po čemu se medicinski pedikir razlikuje od običnog?", "acceptedAnswer": { "@type": "Answer", "text": "Estetski pedikir ulepšava zdrava stopala, dok se medicinski pedikir bavi zdravljem stopala — uraslim noktima, ispucalim petama (hiperkeratozama), žuljevima, kurjim okom i gljivičnim infekcijama. Radi se sterilnim instrumentarijumom uz kliničke protokole." } },
+      { "@type": "Question", "name": "Koliko traje tretman lica i koliko često da dolazim?", "acceptedAnswer": { "@type": "Answer", "text": "Tretman lica prilagođavamo tipu vaše kože, pa se trajanje i dinamika razlikuju. Posle analize kože predlažemo plan — za problematičnu kožu obično je potrebno nekoliko tretmana, a zatim redovno održavanje." } },
+      { "@type": "Question", "name": "Da li je hladni vosak bezbedan za proširene vene i kapilare?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Za razliku od toplog voska, hladni vosak se preporučuje osobama sa proširenim venama ili kapilarima jer ne zagreva i ne širi krvne sudove." } },
+      { "@type": "Question", "name": "Radite li sa osetljivom kožom sklonom aknama?", "acceptedAnswer": { "@type": "Answer", "text": "Da — to je naš fokus. Koristimo biljne ekstrakte (azulen, argan, aloja, lavanda) i pristup prilagođen vašoj koži, sa ciljem da rešimo uzrok problema, a ne samo simptom." } },
+      { "@type": "Question", "name": "Kako da zakažem termin?", "acceptedAnswer": { "@type": "Answer", "text": "Najbrže telefonom na 064 165 4676, ili popunite kontakt formu i javićemo vam se u najkraćem roku. Salon se nalazi na adresi Ratka Mitrovića 162/20, Beograd." } }
+    ]
+  }
+  </script>
 </section>
 
 
@@ -1954,6 +2199,87 @@
         errEl.textContent = 'Greška pri slanju. Pokušajte ponovo ili nas pozovite direktno.';
       });
   }
+
+  /* ── FAQ accordion: smooth slide-open answers ── */
+  (function() {
+    const items = document.querySelectorAll('#faq .faq-item');
+    if (!items.length) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    items.forEach(function(item) {
+      const summary = item.querySelector('summary');
+      const answer  = item.querySelector('.faq-answer');
+      if (!summary || !answer) return;
+
+      /* Wrap the answer text so we can fade/slide it independently of the height. */
+      const inner = document.createElement('div');
+      inner.className = 'faq-answer-inner';
+      while (answer.firstChild) inner.appendChild(answer.firstChild);
+      answer.appendChild(inner);
+
+      /* Wrap the plus icon in a circle target. */
+      const icon = summary.querySelector('.faq-icon');
+      if (icon && !icon.parentElement.classList.contains('faq-icon-wrap')) {
+        const wrap = document.createElement('span');
+        wrap.className = 'faq-icon-wrap';
+        icon.parentNode.insertBefore(wrap, icon);
+        wrap.appendChild(icon);
+      }
+
+      summary.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (item.dataset.animating === '1') return;
+
+        if (reduceMotion) {
+          item.open = !item.open;
+          answer.style.height = item.open ? 'auto' : '0';
+          inner.classList.toggle('is-revealed', item.open);
+          return;
+        }
+
+        if (item.open) {
+          /* CLOSE */
+          item.dataset.animating = '1';
+          const start = answer.scrollHeight;
+          answer.style.transition = 'none';
+          answer.style.height = start + 'px';
+          void answer.offsetHeight; /* force reflow */
+          inner.classList.remove('is-revealed');
+          answer.style.transition = 'height 0.42s cubic-bezier(.4,0,.2,1)';
+          answer.style.height = '0px';
+
+          const done = function(ev) {
+            if (ev.propertyName !== 'height') return;
+            item.open = false;
+            answer.style.transition = '';
+            item.dataset.animating = '0';
+            answer.removeEventListener('transitionend', done);
+          };
+          answer.addEventListener('transitionend', done);
+        } else {
+          /* OPEN */
+          item.dataset.animating = '1';
+          item.open = true;
+          answer.style.transition = 'none';
+          answer.style.height = '0px';
+          void answer.offsetHeight; /* force reflow */
+          const target = answer.scrollHeight;
+          answer.style.transition = 'height 0.55s cubic-bezier(.16,1,.3,1)';
+          answer.style.height = target + 'px';
+          inner.classList.add('is-revealed');
+
+          const done = function(ev) {
+            if (ev.propertyName !== 'height') return;
+            answer.style.height = 'auto'; /* allow reflow if viewport changes */
+            answer.style.transition = '';
+            item.dataset.animating = '0';
+            answer.removeEventListener('transitionend', done);
+          };
+          answer.addEventListener('transitionend', done);
+        }
+      });
+    });
+  })();
 
 </script>
 

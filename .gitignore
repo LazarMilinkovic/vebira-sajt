@@ -3,3 +3,11 @@ screenshot*.mjs
 
 # Temporary screenshots
 temporary screenshots/
+
+# Node dependencies (local tooling only)
+node_modules/
+package-lock.json
+
+# Local AI tooling (skills, agents)
+.claude/
+.agents/
