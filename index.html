@@ -689,13 +689,14 @@
 ════════════════════════════════════════ -->
 <section id="hero" style="position:relative;height:100dvh;min-height:640px;overflow:hidden;">
 
-  <!-- Video background — Seedance AI (4 MB, loops silently) -->
+  <!-- Video background — desktop + mobile varijanta, JS bira izvor (loops silently) -->
   <video id="hero-video"
          autoplay muted loop playsinline
          preload="metadata"
          poster="resources/hero-poster.jpg"
+         data-src-desktop="resources/hf_20260617_111559_b38cc993-6da4-4746-835b-8a438b80b94e.mp4"
+         data-src-mobile="resources/hero-mobile.mp4"
          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:var(--bark);will-change:transform;">
-    <source src="resources/hf_20260617_111559_b38cc993-6da4-4746-835b-8a438b80b94e.mp4" type="video/mp4">
   </video>
 
   <!-- Dark brand overlay — espresso base + warm rose accent -->
@@ -1461,11 +1462,11 @@
           <div class="price-item"><span class="price-name">Cele noge + intimno</span><span class="price-amt">2.000 rsd</span></div>
           <div class="price-item"><span class="price-name">Polu noge + intimno</span><span class="price-amt">1.200 rsd</span></div>
           <div class="price-item"><span class="price-name">Polu noge</span><span class="price-amt">700 rsd</span></div>
-          <div class="price-item"><span class="price-name">Intimna depilacija</span><span class="price-amt">800 rsd</span></div>
+          <div class="price-item"><span class="price-name">Intimno</span><span class="price-amt">800 rsd</span></div>
           <div class="price-item"><span class="price-name">Ruke</span><span class="price-amt">700 rsd</span></div>
           <div class="price-item"><span class="price-name">Nausnice</span><span class="price-amt">400 rsd</span></div>
           <div class="price-item"><span class="price-name">Leđa</span><span class="price-amt">1.000 rsd</span></div>
-          <div class="price-item"><span class="price-name">Pazuha</span><span class="price-amt">500 rsd</span></div>
+          <div class="price-item"><span class="price-name">Pazusi</span><span class="price-amt">500 rsd</span></div>
           <div class="price-item"><span class="price-name">Korekcija obrva</span><span class="price-amt">500 rsd</span></div>
         </div>
       </div>
@@ -1939,6 +1940,20 @@
   /* ── Hero video parallax ── */
   const heroVideo = document.getElementById('hero-video');
   const heroEl    = document.getElementById('hero');
+
+  /* ── Izbor izvora videa: mobilni vertikalni vs desktop (učitava se samo jedan) ── */
+  (function () {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const src = isMobile
+      ? heroVideo.getAttribute('data-src-mobile')
+      : heroVideo.getAttribute('data-src-desktop');
+    if (src && heroVideo.getAttribute('src') !== src) {
+      heroVideo.setAttribute('src', src);
+      heroVideo.load();
+      const p = heroVideo.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+  })();
   window.addEventListener('scroll', () => {
     const s = window.scrollY;
     if (s < heroEl.offsetHeight * 1.2) {
